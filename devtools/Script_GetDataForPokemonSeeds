@@ -1,0 +1,20 @@
+## To execute on Pokéapi : http://pokeapi.co/ ##
+## Use : script get data for Pokemon Database's seeds on Pokeapi website 
+
+$("#interactive").val("pokedex");
+timeout1 = window.setTimeout(function(){$(".btn.btn-primary").click()}, 300);
+timeout2 = window.setTimeout(function(){doYourWork()}, 2000);
+
+function doYourWork(){
+	var pkmn = jQuery.parseJSON($("#interactive_output").text()).objects[0].pokemon;
+	pkmn = pkmn.sort(function(a, b){return a.resource_uri.replace("api/v1/pokemon/","").replace("/","")-b.resource_uri.replace("api/v1/pokemon/","").replace("/","")});
+
+	for ( var i = 0; i < pkmn.length; i++ ){
+		index = pkmn[i].resource_uri.replace("api/v1/pokemon/","").replace("/","");
+		namePkmn = pkmn[i].name;
+		namePkmn = namePkmn[0].toUpperCase() + namePkmn.substring( 1,namePkmn.length );
+
+		str = "Pokemon.create(number:"+index+", name:'"+ namePkmn + "', picturelink:'"+index+"', smallpicturelink:'"+index+"s')";
+		console.log(str);
+	}
+}
