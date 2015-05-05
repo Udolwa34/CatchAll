@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  number: 1
+  name: MyString
+  picturelink: MyString
+  region: MyString
+  champion: MyString
+  ville: MyString
+  type: 
+
+two:
+  number: 1
+  name: MyString
+  picturelink: MyString
+  region: MyString
+  champion: MyString
+  ville: MyString
+  type: 

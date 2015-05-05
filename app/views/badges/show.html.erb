@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Number:</strong>
+  <%= @badge.number %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @badge.name %>
+</p>
+
+<p>
+  <strong>Picturelink:</strong>
+  <%= @badge.picturelink %>
+</p>
+
+<p>
+  <strong>Region:</strong>
+  <%= @badge.region %>
+</p>
+
+<p>
+  <strong>Champion:</strong>
+  <%= @badge.champion %>
+</p>
+
+<p>
+  <strong>Ville:</strong>
+  <%= @badge.ville %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @badge.type %>
+</p>
+
+<%= link_to 'Edit', edit_badge_path(@badge) %> |
+<%= link_to 'Back', badges_path %>
