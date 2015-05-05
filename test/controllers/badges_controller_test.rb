@@ -18,7 +18,7 @@ class BadgesControllerTest < ActionController::TestCase
 
   test "should create badge" do
     assert_difference('Badge.count') do
-      post :create, badge: { champion: @badge.champion, name: @badge.name, number: @badge.number, picturelink: @badge.picturelink, region: @badge.region, type: @badge.type, ville: @badge.ville }
+      post :create, badge: { champion: @badge.champion, name: @badge.name, number: @badge.number, picturelink: @badge.picturelink, region: @badge.region, typebadge: @badge.type, ville: @badge.ville }
     end
 
     assert_redirected_to badge_path(assigns(:badge))
@@ -35,7 +35,7 @@ class BadgesControllerTest < ActionController::TestCase
   end
 
   test "should update badge" do
-    patch :update, id: @badge, badge: { champion: @badge.champion, name: @badge.name, number: @badge.number, picturelink: @badge.picturelink, region: @badge.region, type: @badge.type, ville: @badge.ville }
+    patch :update, id: @badge, badge: { champion: @badge.champion, name: @badge.name, number: @badge.number, picturelink: @badge.picturelink, region: @badge.region, typebadge: @badge.type, ville: @badge.ville }
     assert_redirected_to badge_path(assigns(:badge))
   end
 

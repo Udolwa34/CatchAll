@@ -1,1 +1,1 @@
-json.extract! @badge, :id, :number, :name, :picturelink, :region, :champion, :ville, :type, :created_at, :updated_at
+json.extract! @badge, :id, :number, :name, :picturelink, :region, :champion, :ville, :typebadge, :created_at, :updated_at

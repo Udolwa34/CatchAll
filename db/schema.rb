@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150505183554) do
+ActiveRecord::Schema.define(version: 20150505203403) do
 
   create_table "badges", force: :cascade do |t|
     t.integer  "number"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20150505183554) do
     t.string   "region"
     t.string   "champion"
     t.string   "ville"
-    t.string   "type"
+    t.string   "typebadge"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
