@@ -21,6 +21,7 @@ class PokemonsController < ApplicationController
   def edit
   end
 
+
   # POST /pokemons
   # POST /pokemons.json
   def create
@@ -60,6 +61,25 @@ class PokemonsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
+  # GET /api/search
+  def apisearch
+    @valueRecherche = params[:search].to_s
+    @results = []
+    if @valueRecherche != ""
+      @results = Pokemon.where("name LIKE :name", {:name => "%"+@valueRecherche+"%"}).limit(10)
+    end
+
+    render :text => @results.to_json
+
+    #return @results.to_json
+  end
+
+  # GET /search
+  def search
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

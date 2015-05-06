@@ -6,6 +6,10 @@ Rails.application.routes.draw do
 
   get 'megabookedex' => 'megabookedex#index'
 
+  get 'search' => 'pokemons#search'
+  get 'api/search' => 'pokemons#apisearch'
+  
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
