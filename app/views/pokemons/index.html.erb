@@ -18,8 +18,8 @@
       <tr>
         <td><%= pokemon.number %></td>
         <td><%= pokemon.name %></td>
-        <td><%= pokemon.picturelink %></td>
-        <td><%= pokemon.smallpicturelink %></td>
+        <td><%= pokemon.picturelink  %></td>
+        <td><%= image_tag("pokemon/"+pokemon.smallpicturelink+".png") %></td>
         <td><%= link_to 'Show', pokemon %></td>
         <td><%= link_to 'Edit', edit_pokemon_path(pokemon) %></td>
         <td><%= link_to 'Destroy', pokemon, method: :delete, data: { confirm: 'Are you sure?' } %></td>
