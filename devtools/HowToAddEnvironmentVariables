@@ -1,0 +1,27 @@
+# How to add Environment Variables to Ruby Project
+# USE : configure the SMTP for account creation's confirmation mail 
+
+# 1 : Create a new file ".env" in the root directory of project
+
+# 2 : Add following ligns in this file
+GMAIL_DOMAIN=gmail.com
+GMAIL_USERNAME=catchall.rails@gmail.com
+GMAIL_PASSWORD=XXX
+
+# 3 : Ask for PASSWORD value to your co-worker
+
+# 4 : Replace value "XXX" with the real value
+
+# 5 : Save the file 
+
+# 6 : Restart your server
+
+# 7 : Try going on adress ".../trainers/sign_up". Fill the fields and click on "Sign up"
+
+=> Exception ? ====> Just cry !
+=> You got mail !? ====> Yipee !
+
+# 8 : Just have to click on the link on the mail to confirm your inscription
+
+
+GOOD LUCK JIM.
