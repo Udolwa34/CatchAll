@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :pokemons
   resources :badges
 
-  root 'pokemons#index'
+  root 'pokemons#search'
 
   get 'megabookedex' => 'megabookedex#index'
 
