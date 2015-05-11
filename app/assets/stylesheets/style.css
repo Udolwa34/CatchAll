@@ -1,0 +1,235 @@
+html, body{
+	height: 100%;
+}
+body{
+	padding-top: 70px;
+	background-color: #F9F9F9;
+}
+
+label{
+	font-weight: lighter;
+	font-size: 16px;
+}
+
+a{
+	color :#563d7c
+;
+}
+
+a:hover{
+	color: #573f7b
+;
+}
+
+h1,h2,h3,h4,h5,h6{
+	font-weight: lighter;
+}
+
+td{vertical-align: inherit !important;}
+
+footer{
+	margin-top: 50px;
+	background-color: white;
+	padding: 10px 0;
+	box-shadow: 0 0 2px gray;
+}
+
+footer > .container{
+	padding-top: 10px;
+	color:#563d7c
+;
+	font-weight: lighter;
+}
+
+footer > .container > p > a{
+	color: #563d7c
+;
+	text-decoration: underline;
+}
+
+.navbar-default{
+	background-color: white;
+	border:none;
+	box-shadow: 0 0 2px gray;
+	border-radius: 0px;
+	font-weight: lighter;
+}
+
+.navbar-default .navbar-nav>li>a{
+	color:#563d7c
+;
+	font-size: 16px;
+}
+
+.navbar-default .navbar-brand{
+	color: #563d7c
+;
+	font-size: 20px;
+}
+
+.introduction{
+	text-align: center;
+	font-weight: lighter;
+}
+
+#searchBar{
+	margin-top: 5px;
+	margin-bottom: 20px;
+}
+
+#searchBar > div > input{
+	height: 60px;
+	font-size: 18px;
+	font-weight: lighter;
+}
+
+#searchBar > div > span > button{
+	height: 60px;
+	width: 150px;
+	background-color: #563d7c
+;
+	color: white;
+	font-size: 18px;
+	font-weight: lighter;
+}
+
+#pageNavigation{
+	margin-top: -10px;
+}
+
+
+
+#pokemonName{
+	margin-top: -10px;
+}
+
+#pokemonInformations{
+	font-weight: lighter;
+}
+
+#pokemonInformations tr td:first-child{
+	width: 30%;
+}
+#pokemonInformations tr td:nth-child(2){
+	width: 70%;
+}
+
+.btn-purple{
+	background-color: #563d7c
+;
+	color: white;
+	font-weight: lighter;
+	transition:0.3s;
+}
+
+.btn-purple:hover{
+	color:white;
+	background-color: #573f7b
+;
+}
+
+
+/*---------------------Login----------------------*/
+
+#logContainer{
+	padding-bottom: 100px;
+	font-weight: lighter;
+}
+
+/*--------------------Ranking---------------------*/
+.thumbnail{
+	font-weight: lighter;
+}
+
+.thumbnail h1{
+	text-align: center;
+}
+
+.thumbnail p{
+	text-align: center;
+	font-size: 16px;
+}
+
+.thumbnail img{
+	margin-top: 20px;
+	max-width: 150px;
+	max-height: 150px;
+	margin: auto;
+	width: 100%;
+}
+
+.table td{
+	padding: 10px 0;
+}
+.pagination>li>a, .pagination>li>span{
+	color: #563d7c;
+}
+
+/*------------------Contact-------------------*/
+
+#contactHeader{
+	background-color: #563d7c;
+	width: 100%;
+	padding: 40px;
+	margin-top: -20px;
+	font-weight: lighter;
+	margin-bottom: 60px;
+}
+
+#contactHeader h1{
+	text-align: center;
+	font-size: 40px;
+	color: white;
+	font-weight: lighter;
+	line-height: 60px;
+}
+
+#contactForm{
+	padding-bottom: 100px;
+}
+
+#contactForm input[type="text"]{
+	margin-bottom: 20px;
+	height: 50px;
+	font-size: 18px;
+	font-weight: lighter;
+}
+
+#contactForm textarea{
+	resize:vertical;
+	margin-bottom: 20px;
+	height: 400px;
+	padding: 10px;
+	font-size: 16px;
+	font-weight:lighter;
+}
+
+/*---------------------- MegaBookedex ---------------*/
+
+.grayScale{
+	filter:grayscale(1);
+	-webkit-filter: grayscale(1);
+    -moz-filter: grayscale(1);
+    -o-filter: grayscale(1);
+    -ms-filter: grayscale(1);
+    opacity: 0.3
+}
+
+.pokeball{
+	height: 32px;
+	width: 32px !important;
+	position: absolute;
+	bottom: 25px;
+	right:20px;
+}
+
+
+
+
+
+
+
+
+
+
+
