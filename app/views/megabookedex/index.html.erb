@@ -1,35 +1,35 @@
 <p id="notice"><%= notice %></p>
 
 <div class="container">
-	<div class="introduction page-header">
-		<h1>Megabookedex</h1>
-		<h3>The book which gather all pokemons and badges.</h3>
-	</div>
+  <div class="introduction page-header">
+    <h1>Megabookedex</h1>
+    <h3>The Ultimate Book which gather all your Pokemon and badges.</h3>
+  </div>
 </div>
 
 <div class="container">
-	<div class="panel panel-default">
-		<div class="panel-heading">Badges</div>
-		<div class="panel-body">
-          <label for="">Progress:</label>
-          <div class="progress">
-            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="53" aria-valuemin="0" aria-valuemax="100" style="width: 53%">
-              <span class="sr-only">53% Complete</span>30/56
-            </div>
-          </div>
-          <div class="form-login">
-            <ul class="nav nav-tabs">
-            <li role="presentation" class="active"><a href="#kanto" data-toggle="tab">Kanto</a></li>
-            <li role="presentation"><a href="#johto" data-toggle="tab">Johto</a></li>
-            <li role="presentation"><a href="#hoenn" data-toggle="tab">Hoenn</a></li>
-            <li role="presentation"><a href="#sinnoh" data-toggle="tab">Sinnoh</a></li>
-            <li role="presentation"><a href="#unys" data-toggle="tab">Unys</a></li>
-            <li role="presentation"><a href="#kalos" data-toggle="tab">Kalos</a></li>
-          </ul>
+  <div class="panel panel-default">
+    <div class="panel-heading">Badges</div>
+    <div class="panel-body">
+      <label for="">Progress:</label>
+      <div class="progress">
+        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="53" aria-valuemin="0" aria-valuemax="100" style="width: 53%">
+          <span class="sr-only">53% Complete</span>30/56
+        </div>
+      </div>
+      <div class="form-login">
+        <ul class="nav nav-tabs">
+          <li role="presentation" class="active"><a href="#Kanto" data-toggle="tab">Kanto</a></li>
+          <li role="presentation"><a href="#Johto" data-toggle="tab">Johto</a></li>
+          <li role="presentation"><a href="#Hoenn" data-toggle="tab">Hoenn</a></li>
+          <li role="presentation"><a href="#Sinnoh" data-toggle="tab">Sinnoh</a></li>
+          <li role="presentation"><a href="#Unys" data-toggle="tab">Unys</a></li>
+          <li role="presentation"><a href="#Kalos" data-toggle="tab">Kalos</a></li>
+        </ul>
           
-        <div id="loginTabContent" class="tab-content form-login-content">   
-
-          <div class="tab-pane fade active in" id="kanto">
+        <div id="loginTabContent" class="tab-content form-login-content"> 
+          <% for n in (0..5) do %>
+          <div class="tab-pane fade <%= (n == 0) ? ('active') : ('') %> in" id="<%= @regions[n] %>">
             <table class="table">
               <thead>
                 <tr>
@@ -42,156 +42,23 @@
                 </tr>
               </thead>
               <tbody>
-                <% @badgesByRegion[0].each do |badge| %>
-			      <tr>
-			      	<td><img src="http://www.pokepedia.fr/<%= badge.picturelink %>"/></td>
-			        <td><%= badge.name %></td>
-			        <td><%= badge.champion %></td>
-			        <td><%= badge.ville %></td>
-			        <td><%= badge.typebadge %></td>
-                  	<td><input type="checkbox" checked=""></td>
-			      </tr>
-			    <% end %>
+                <% @badgesByRegion[n].each do |badge| %>
+                  <tr>
+                    <td><img src="http://www.pokepedia.fr/<%= badge.picturelink %>"/></td>
+                    <td><%= badge.name %></td>
+                    <td><%= badge.champion %></td>
+                    <td><%= badge.ville %></td>
+                    <td><%= badge.typebadge %></td>
+                          <td><input type="checkbox" checked=""></td>
+                  </tr>
+                <% end %>
               </tbody>
             </table> 
           </div>
-
-          <div class="tab-pane fade" id="johto">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>Name</th>
-                  <th>Champion</th>
-                  <th>City</th>
-                  <th>Type</th>
-                  <th>Obtained</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% @badgesByRegion[1].each do |badge| %>
-			      <tr>
-			      	<td><img src="http://www.pokepedia.fr/<%= badge.picturelink %>"/></td>
-			        <td><%= badge.name %></td>
-			        <td><%= badge.champion %></td>
-			        <td><%= badge.ville %></td>
-			        <td><%= badge.typebadge %></td>
-                  	<td><input type="checkbox" checked=""></td>
-			      </tr>
-			    <% end %>
-              </tbody>
-            </table> 
-          </div>
-
-          <div class="tab-pane fade" id="hoenn">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>Name</th>
-                  <th>Champion</th>
-                  <th>City</th>
-                  <th>Type</th>
-                  <th>Obtained</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% @badgesByRegion[2].each do |badge| %>
-			      <tr>
-			      	<td><img src="http://www.pokepedia.fr/<%= badge.picturelink %>"/></td>
-			        <td><%= badge.name %></td>
-			        <td><%= badge.champion %></td>
-			        <td><%= badge.ville %></td>
-			        <td><%= badge.typebadge %></td>
-                  	<td><input type="checkbox" checked=""></td>
-			      </tr>
-			    <% end %>
-              </tbody>
-            </table> 
-          </div>
-          <div class="tab-pane fade" id="sinnoh">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>Name</th>
-                  <th>Champion</th>
-                  <th>City</th>
-                  <th>Type</th>
-                  <th>Obtained</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% @badgesByRegion[3].each do |badge| %>
-			      <tr>
-			      	<td><img src="http://www.pokepedia.fr/<%= badge.picturelink %>"/></td>
-			        <td><%= badge.name %></td>
-			        <td><%= badge.champion %></td>
-			        <td><%= badge.ville %></td>
-			        <td><%= badge.typebadge %></td>
-                  	<td><input type="checkbox" checked=""></td>
-			      </tr>
-			    <% end %>
-              </tbody>
-            </table> 
-          </div>
-          <div class="tab-pane fade" id="unys">
-           <table class="table">
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>Name</th>
-                  <th>Champion</th>
-                  <th>City</th>
-                  <th>Type</th>
-                  <th>Obtained</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% @badgesByRegion[4].each do |badge| %>
-			      <tr>
-			      	<td><img src="http://www.pokepedia.fr/<%= badge.picturelink %>"/></td>
-			        <td><%= badge.name %></td>
-			        <td><%= badge.champion %></td>
-			        <td><%= badge.ville %></td>
-			        <td><%= badge.typebadge %></td>
-                  	<td><input type="checkbox" checked=""></td>
-			      </tr>
-			    <% end %>
-              </tbody>
-            </table> 
-          </div>
-          <div class="tab-pane fade" id="kalos">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>Name</th>
-                  <th>Champion</th>
-                  <th>City</th>
-                  <th>Type</th>
-                  <th>Obtained</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% @badgesByRegion[5].each do |badge| %>
-			      <tr>
-			      	<td><img src="http://www.pokepedia.fr/<%= badge.picturelink %>"/></td>
-			        <td><%= badge.name %></td>
-			        <td><%= badge.champion %></td>
-			        <td><%= badge.ville %></td>
-			        <td><%= badge.typebadge %></td>
-                  	<td><input type="checkbox" checked=""></td>
-			      </tr>
-			    <% end %>
-              </tbody>
-            </table> 
-          </div>
+          <% end %>
 
         </div> <!-- /loginTabContent -->
-          </div>
-          
-
-        </div>
-	</div>
+      </div> <!-- form-login -->
+    </div> <!-- panel-body --> 
+  </div> <!-- panel panel-default -->
 </div>
