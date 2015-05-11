@@ -1,3 +1,14 @@
+<% if trainer_signed_in? %>
+  <li>
+  <%= link_to('Logout', destroy_trainer_session_path, :method => :delete) %>        
+  </li>
+  <%= current_trainer.email %>
+<% else %>
+  <li>
+  <%= link_to('Login', new_trainer_session_path)  %>  
+  </li>
+<% end %>
+
 <div class="field">
 	<%= label_tag(:search, "Search your Pokemon:") %>
 	<%= text_field_tag(:search) %>
