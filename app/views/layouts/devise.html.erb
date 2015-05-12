@@ -8,19 +8,38 @@
 </head>
 <body>
     <!-- Fixed navbar -->
-
-<%= yield %>
-
 <div class="container">
+  <h1>CatchAll</h1>
+  <h5>The online bible for pokemons' trainers.</h5>
+  <hr>
   <p class="notice"><%= notice %></p>
   <p class="alert" id="error"><%= alert %></p>
 </div>
+<%= yield %>
 
 <script type="text/javascript">
   jQuery(document).ready(function() {
     conteneur = jQuery("#error");
     if(conteneur.html() != "") {
       conteneur.addClass("bg-danger");
+
+      if($("#error").text() === "Invalid email or password."){
+        $("#loginTab li:nth-child(1)").removeClass("active");
+        $("#loginTab li:nth-child(1) a").removeClass("active");
+        $("#about").removeClass("active in");
+
+        $("#loginTab li:nth-child(2)").addClass("active");
+        $("#loginTab li:nth-child(2) a").addClass("active");
+        $("#login").addClass("active in");
+
+        $("#loginTab li:nth-child(3)").removeClass("active");
+        $("#loginTab li:nth-child(3) a").removeClass("active");
+        $("#register").removeClass("active in");
+
+        $("#loginTab li:nth-child(4)").removeClass("active");
+        $("#loginTab li:nth-child(4) a").removeClass("active");
+        $("#reset").removeClass("actiin in");
+      }
     }
     else {
       conteneur.css("display","none");

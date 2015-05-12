@@ -196,6 +196,13 @@ footer > .container > p > a{
 .bg-danger {
 	text-align: center;
   	font-weight: bold;
+  	color:#DD0000;
+  	margin-top: 20px;
+  	margin-bottom: 0px;
+}
+
+#form-login li.active:hover{
+	background: white !important;
 }
 
 /*--------------------Ranking---------------------*/
