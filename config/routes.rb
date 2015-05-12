@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :trainers
   resources :pokemons
   resources :badges
 
@@ -8,6 +9,8 @@ Rails.application.routes.draw do
 
   get 'search' => 'pokemons#search'
   get 'api/search' => 'pokemons#apisearch'
+
+  get 'dev/deltrainers' => 'megabookedex#deltrainers'
   
 
   # The priority is based upon order of creation: first created -> highest priority.

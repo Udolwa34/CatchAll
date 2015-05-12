@@ -22,7 +22,7 @@
         <div id="navbar" class="navbar-collapse collapse">
         	<ul class="nav navbar-nav">
         		<li><%= link_to "Home", root_url , class: "navbar-brand" %></li>
-	            <li><%= link_to "MegaBookedex", { controller: "megabookedex" } %></li>
+	            <li><%= link_to "MegaBookedex", controller: "/megabookedex" %></li>
 	            <li><a href="ranking.html">Ranking</a></li>
         	</ul>
           <ul class="nav navbar-nav navbar-right">
@@ -39,6 +39,9 @@
         </div><!--/.nav-collapse -->
       </div>
     </nav>
+
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
 
 <%= yield %>
 
