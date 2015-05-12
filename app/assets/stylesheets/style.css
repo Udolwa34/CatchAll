@@ -25,7 +25,10 @@ h1,h2,h3,h4,h5,h6{
 	font-weight: lighter;
 }
 
-td{vertical-align: inherit !important;}
+td{
+	vertical-align: inherit !important;
+	text-transform: capitalize !important;
+}
 
 .col-lg-12{
 	padding: 0 !important;
@@ -118,6 +121,12 @@ footer > .container > p > a{
 	width: 70%;
 }
 
+#pokemonImage{
+	max-height: 100%;
+	max-width: 100%;
+	margin: 0 auto !important;
+}
+
 .btn-purple{
 	background-color: #563d7c
 ;
@@ -130,23 +139,6 @@ footer > .container > p > a{
 	color:white;
 	background-color: #573f7b
 ;
-}
-
-.searchAutoComplete{
-	list-style: none;
-	border: 1px solid silver;
-	background: white;
-	border-radius: 4px;
-	position: absolute;
-	z-index: 1000;
-	width: 100%;
-	padding: 0px;
-}
-
-
-.searchAutoComplete li{
-	padding: 10px !important;
-	margin: 0 !important;
 }
 
 .ui-widget-content{
@@ -165,13 +157,6 @@ footer > .container > p > a{
 	padding: 10px !important;
 }
 
-.searchAutoComplete li:hover{
-	background: #F5F5F5 ;
-}
-
-#propositions{
-	display: none;
-}
 
 
 

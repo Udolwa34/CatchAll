@@ -60,8 +60,12 @@ function searchPkmn(numPokemon){
 		   
 		   success: function(data) {
 
-		   		$("#result").text(data.name + "--" + data.national_id + "--"+ data.types[0].name+"-- + a lot of more informations !");
-
+		   		$("#pokemonImage").attr("src", "/assets/pokemon/"+data.national_id+".png");
+		   		$("#pokemonName h1").text(data.name);
+		   		$("#tdName").text(data.name);
+		   		$("#tdId").text(data.national_id);
+		   		$("#tdType1").text(data.types[0].name);
+		   		data.types.length > 1 ? $("#tdType2").text(data.types[1].name) : $("#tdType2").text("None");
 		   },
 		   
 	});
