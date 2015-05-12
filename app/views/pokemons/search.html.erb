@@ -35,13 +35,13 @@
     <div class="panel-body">
       <nav id="pageNavigation">
         <ul class="pager">
-          <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> Previous</a></li>
-          <li class="next"><a href="#">Next <span aria-hidden="true">&rarr;</span></a></li>
+          <li class="previous"><button disabled id="prevButton"><a><span aria-hidden="true">&larr;</span> Previous</a></button></li>
+          <li class="next"><button id="nextButton"><a>Next <span aria-hidden="true">&rarr;</span></a></button></li>
         </ul>
       </nav>
       <hr>
       <div class="col-sm-6 col-md-6">
-      	<%= image_tag('pokemon/1.png', id:"pokemonImage") %>
+      	<%= image_tag('pokemon/0.png', id:"pokemonImage") %>
       </div>
       <div class="col-sm-6 col-md-6">
         <div class="page-header" id="pokemonName">
@@ -58,12 +58,16 @@
             </thead>
             <tbody>
               <tr>
+                <td>National ID</td>
+                <td id="tdId">-</td>
+              </tr>
+              <tr>
                 <td>Name</td>
                 <td id="tdName">-</td>
               </tr>
               <tr>
-                <td>National ID</td>
-                <td id="tdId">-</td>
+                <td>Species</td>
+                <td id="tdSpecies">-</td>
               </tr>
               <tr>
                 <td>Height</td>
@@ -74,14 +78,8 @@
                 <td id="tdWeight">-</td>
               </tr>
               <tr>
-                <td>Species</td>
-                <td id="tdSpecies">-</td>
-              </tr>
-              <tr>
-                <td>Gender Rate</td>
-                <td id="tdGender">
-                  -
-                </td>
+                <td>Attack / Defense</td>
+                <td id="tdAttackDefense">-</td>
               </tr>
               <tr>
                 <td>Type 1</td>
@@ -92,10 +90,8 @@
                 <td id="tdType2">-</td>
               </tr>
               <tr>
-                <td>Version</td>
-                <td id="tdVersion">
-                  -
-                </td>
+                <td>Evolution</td>
+                <td id="tdEvolution">-</td>
               </tr>
             </tbody>
           </table>
@@ -109,9 +105,4 @@
       </div>
     </div>
   </div>
-</div>
-
-<div id="result">
-	<button id="prevButton">Prev</button>
-	<button id="nextButton">Next</button>
 </div>
