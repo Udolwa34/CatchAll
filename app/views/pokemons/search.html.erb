@@ -27,7 +27,88 @@
     </div> <!-- /container -->
 </div>
 
-<div id="result">
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Pokemon's informations</h3>
+    </div>
+    <div class="panel-body">
+      <nav id="pageNavigation">
+        <ul class="pager">
+          <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> Previous</a></li>
+          <li class="next"><a href="#">Next <span aria-hidden="true">&rarr;</span></a></li>
+        </ul>
+      </nav>
+      <hr>
+      <div class="col-sm-6 col-md-6">
+      	<%= image_tag('pokemon/1.png', id:"pokemonImage") %>
+      </div>
+      <div class="col-sm-6 col-md-6">
+        <div class="page-header" id="pokemonName">
+          <h1>Search pokemon</h1>
+        </div>
+        <div class="panel panel-default">
+          <!-- Table -->
+          <table class="table" id="pokemonInformations">
+            <thead>
+              <tr>
+                <th>Properties</th>
+                <th>Values</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Name</td>
+                <td id="tdName">-</td>
+              </tr>
+              <tr>
+                <td>National ID</td>
+                <td id="tdId">-</td>
+              </tr>
+              <tr>
+                <td>Height</td>
+                <td id="tdHeight">-</td>
+              </tr>
+              <tr>
+                <td>Weight</td>
+                <td id="tdWeight">-</td>
+              </tr>
+              <tr>
+                <td>Species</td>
+                <td id="tdSpecies">-</td>
+              </tr>
+              <tr>
+                <td>Gender Rate</td>
+                <td id="tdGender">
+                  -
+                </td>
+              </tr>
+              <tr>
+                <td>Type 1</td>
+                <td id="tdType1">-</td>
+              </tr>
+              <tr>
+                <td>Type 2</td>
+                <td id="tdType2">-</td>
+              </tr>
+              <tr>
+                <td>Version</td>
+                <td id="tdVersion">
+                  -
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <form action="">
+            <button class='btn btn-purple'>Seen</button>
+            <button class='btn btn-purple'>Caught</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div id="result">
