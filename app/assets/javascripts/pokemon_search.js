@@ -23,7 +23,7 @@ $(document).ready(function(){
 	        minLength: 3,
 	        autoFocus: false,
 	        select: function(event, ui) {
-		        numPokemon = $("#search").val().split(" - #")[1];
+		        numPokemon = ui.item.label.split(" - #")[1];
         		searchPkmn(numPokemon);
 		    }
 	    });
