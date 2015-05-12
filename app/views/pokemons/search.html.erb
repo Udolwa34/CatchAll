@@ -1,10 +1,20 @@
 <div class="field">
-	<%= label_tag(:search, "Search your Pokemon:") %>
-	<%= text_field_tag(:search) %>
-	<button id="searchPokemonBTN">Search</button>
-	<ul id="propositions">
-	</ul>
+	<div class="container">
+		<div class="introduction page-header">
+	        <h1>CatchAll</h1>
+	        <h3>The online bible for pokemons' trainers</h3> 
+	        <p>
+	          You want to gather each pokemon you've seen or caught in your favourite pokemon's versions? Or just see pokemons' informations?<br>
+	          Use the following input!
+	        </p>
+	    </div>
+
+	    <div class="col-lg-12 ui-widget" id="searchBar">
+			<%= text_field_tag(:search, nil, placeholder: "Search by name..." ,class: "form-control") %>
+	    </div><!-- /.col-lg-6 -->
+    </div> <!-- /container -->
 </div>
 
 <div id="result">
 </div>
+
