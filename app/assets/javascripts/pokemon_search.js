@@ -19,7 +19,11 @@ $(document).ready(function(){
 	           });
 	        },
 	        minLength: 3,
-	        autoFocus: true
+	        autoFocus: false,
+	        select: function(event, ui) {
+		        numPokemon = $("#search").val().split(" - #")[1];
+        		searchPkmn(numPokemon);
+		    }
 	    });
 	});
 

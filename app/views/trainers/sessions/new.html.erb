@@ -1,26 +1,69 @@
-<h2>Log in</h2>
+<div class="container" id="logContainer">
+  <h1>CatchAll</h1>
+  <h5>The online bible for pokemons' trainers.</h5>
+  <hr>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+  <div id="form-login">
+    <ul id="loginTab" class="nav tabs">
+      <li class="active"><a href="#about" data-toggle="tab" class="active" aria-expanded="true">What is CatchAll ?</a></li>
+      <li class=""><a href="#login" data-toggle="tab" class="" aria-expanded="true">Login</a></li>
+      <li class=""><a href="#register" data-toggle="tab" class="" aria-expanded="true">Register</a></li>
+      <li class=""><a href="#reset" data-toggle="tab" class="" aria-expanded="true">Reset password</a></li>
+    </ul>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+    <div id="loginTabContent" class="tab-content form-login-content">
+      <div class="tab-pane fade active in" id="about">
+        <h1>What is exactly CatchAll ?</h1> 
+        <hr>
+        <p>
+          Pokemon is your favourite game ? <br>
+          Are you tired of not knowing which and how many pokemons you have seen and caught in totality ?<br>
+          CatchAll is for you ! <br><br>
+          This is a web application which allows the trainers to see pokemons' informations and create his own MegaBookedex gathering every pokemons
+          of each version. You have just to check if you have already seen and caugth it. <br>
+          After that you could know who is the best trainer on CatchAll ! <br><br>
 
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+          Join us. We are already four ! <br>
+          Click on 'Register', enter your informations and the hunt can begin !
+        </p>
+      </div>
+      <div class="tab-pane fade" id="login">
+        <h1>Login</h1> 
+        <hr>
+        <p>
+          You have already an account ?<br>
+          Perfect ! You have just to sign in to see your MegaBookedex.
+        </p>
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <div class="form-group input-group">
+            <span class="input-group-addon">
+              <span class="glyphicon glyphicon-user"></span>
+            </span>
+            <%= f.email_field :email, :class=>"form-control", :id=>"registerUsername", placeholder: "Email", autofocus: true %>
+          </div>
+
+          <div class="form-group input-group">
+            <span class="input-group-addon">
+              <span class="glyphicon glyphicon-lock"></span>
+            </span>
+            <%= f.password_field :password,:class=>"form-control", :id=>"registerUsername", placeholder: "Password", autocomplete: "off" %>
+          </div>
+
+          <% if devise_mapping.rememberable? -%>
+            <div class="checkbox">
+              <label>
+              <%= f.check_box :remember_me, :class=>"checkbox" %>
+              Remember me
+              </label>
+            </div>
+          <% end -%>
+
+          <div class="actions">
+            <%= f.submit "Log in", :class=>"btn btn-purple btn-lg btn-block" %>
+          </div>
+        <% end %>
+      </div>
     </div>
-  <% end -%>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
-
-<%= render "trainers/shared/links" %>
+  <!--<%= render "trainers/shared/links" %>-->
+</div>
