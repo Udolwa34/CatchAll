@@ -193,6 +193,11 @@ footer > .container > p > a{
 	font-weight: lighter;
 }
 
+.bg-danger {
+	text-align: center;
+  	font-weight: bold;
+}
+
 /*--------------------Ranking---------------------*/
 .thumbnail{
 	font-weight: lighter;
