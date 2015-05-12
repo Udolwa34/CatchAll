@@ -79,6 +79,7 @@ class PokemonsController < ApplicationController
 
   # GET /search
   def search
+    @maxPokemon = Pokemon.all.count
   end
 
 
