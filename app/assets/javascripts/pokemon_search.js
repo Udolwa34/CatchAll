@@ -1,37 +1,45 @@
 $(document).ready(function(){
 
-	//Function that handle autocompletion
-	$("#search").keyup(function(){
-		if ( $("#search").val().length > 2 ){
-			$.ajax({
-		       url: "/api/search?search="+$("#search").val()+"",
-		       type: 'GET',
-			   error: function() {
-			      alert('An error occured during the operation. Please, try again later.');
-			   },
-			   
-			   success: function(data) {
-			   		$("#propositions li").remove();
-			   		if (data != "[]"){
-			   			pkmn = jQuery.parseJSON(data);
-			   			for ( i = 0; i < pkmn.length; i++){
-			   				$("#propositions").append(
-			   					"<li><div class='findPkmn' onClick='searchPkmn("+pkmn[i].id+");'>"+pkmn[i].name+"</div></li>");
-			   			}
-						//$("#result").html(text(jQuery.parseJSON(data));
-			   		} else {
-			   			$("#propositions").append("<li>No result for this search</li>"); 
-			   		}
-			   	  
-
-			   },
-			   
-		    });
-		} else {
-			$("#propositions li").remove();
-			//$("#result").text("");
-		}
+    //Function that handle autocompletion
+	$(function () {
+	    $('#search').autocomplete({
+	        source: function (request, response) {
+	           $.ajax({
+	               url: "/api/search?search="+$("#search").val()+"",
+	               type: 'GET',
+	               dataType: 'json',
+	               data: request,
+	               success: function (data) {
+	                   response($.map(data, function (value, key) { 
+	                        return {
+	                            label: value.name + " - #" + value.id,
+	                        };
+	                   }));
+	               }
+	           });
+	        },
+	        minLength: 3,
+	        autoFocus: true
+	    });
 	});
+
+	//Function which launches search
+	$("#search").keyup(function (event){
+
+        var key = event.keyCode || event.which;
+
+        if (key === 13) {
+          	
+        	if ($("#search").val().length > 7 && $("#search").val().split(" - #").length == 2){
+
+        		numPokemon = $("#search").val().split(" - #")[1];
+        		searchPkmn(numPokemon);
+
+        	}
+        }
+
+	});
+
 });
 
 
@@ -47,7 +55,9 @@ function searchPkmn(numPokemon){
 		   },
 		   
 		   success: function(data) {
+
 		   		$("#result").text(data.name + "--" + data.national_id + "--"+ data.types[0].name+"-- + a lot of more informations !");
+
 		   },
 		   
 	});

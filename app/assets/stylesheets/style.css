@@ -27,6 +27,10 @@ h1,h2,h3,h4,h5,h6{
 
 td{vertical-align: inherit !important;}
 
+.col-lg-12{
+	padding: 0 !important;
+}
+
 footer{
 	margin-top: 50px;
 	background-color: white;
@@ -127,6 +131,48 @@ footer > .container > p > a{
 	background-color: #573f7b
 ;
 }
+
+.searchAutoComplete{
+	list-style: none;
+	border: 1px solid silver;
+	background: white;
+	border-radius: 4px;
+	position: absolute;
+	z-index: 1000;
+	width: 100%;
+	padding: 0px;
+}
+
+
+.searchAutoComplete li{
+	padding: 10px !important;
+	margin: 0 !important;
+}
+
+.ui-widget-content{
+	background: #FFF !important ;
+}
+
+.ui-menu-item:hover, .ui-state-focus{
+	background: #F5F5F5 !important ;
+	border: 0 !important;
+	color: #573f7b !important;
+	font-weight: normal !important;
+	margin: 0 !important;
+}
+
+.ui-menu-item{
+	padding: 10px !important;
+}
+
+.searchAutoComplete li:hover{
+	background: #F5F5F5 ;
+}
+
+#propositions{
+	display: none;
+}
+
 
 
 /*---------------------Login----------------------*/
