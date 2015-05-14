@@ -1,22 +1,46 @@
 class BadgesController < ApplicationController
-  before_action :set_badge, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_trainer!
+  before_action :set_badge, only: [:show, :edit, :update, :destroy, :removeFromTrainer, :addToTrainer]
+  #before_action :authenticate_trainer!
+
+
+
+  #TODO ! Limiter l'accès en JSON seulement
+  #Removing a badge from a trainer's collection
+  def removeFromTrainer
+    if !@badge.trainers.exists?(current_trainer) 
+      #Throw Error
+      render nothing: true, :status => :forbidden
+    else
+      #Remove of badge
+      @badge.trainers.delete(current_trainer)
+
+      #Rendering with some data
+      @badgesTotal = Badge.all.count
+      @trainerBadges = current_trainer.badges.count
+      render json: { :total => @badgesTotal, :trainerNbr => @trainerBadges }, status: :ok
+    end 
+  end
+
+  #Adding a badge to a trainer's collection
+  #TODO ! Limiter l'accès en JSON seulement
+  def addToTrainer
+    if @badge.trainers.exists?(current_trainer) 
+      #Throw Error
+      render nothing: true, :status => :forbidden
+    else
+      #Add badge
+      @badge.trainers<< current_trainer
+
+      #Rendering with some data
+      @badgesTotal = Badge.all.count
+      @trainerBadges = current_trainer.badges.count
+      render json: { :total => @badgesTotal, :trainerNbr => @trainerBadges }, status: :ok
+    end 
+  end
 
   # GET /badges
   # GET /badges.json
   def index
-    @badges = Badge.all
-    @regions = ["Kanto", "Johto", "Hoenn", "Sinnoh", "Unys", "Kalos"]
-    @badgesByRegion = [[], [], [], [], [], []]
-
-    @badges.each do |badge|
-      for n in (0..5) do
-        if badge.region == @regions[n]
-           @badgesByRegion[n].push badge
-          break
-        end
-      end
-    end 
   end
 
   # GET /badges/1
@@ -52,6 +76,10 @@ class BadgesController < ApplicationController
   # PATCH/PUT /badges/1
   # PATCH/PUT /badges/1.json
   def update
+    if !@badge.trainers.exists?(current_trainer) 
+      @badge.trainers<< current_trainer
+    end
+
     respond_to do |format|
       if @badge.update(badge_params)
         format.html { redirect_to @badge, notice: 'Badge was successfully updated.' }
@@ -77,6 +105,7 @@ class BadgesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_badge
       @badge = Badge.find(params[:id])
+      return
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
