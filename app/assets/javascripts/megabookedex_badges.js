@@ -21,6 +21,28 @@ function removeBadgeById(idBadge){
    });
 }
 
+//Adding a badge to a trainer's collection
+function addBadgeById(idBadge){
+	$.ajax({
+       url: "/badges/addToTrainer/"+idBadge,
+       type: 'GET',
+       dataType: 'json',
+       success: function (data) {
+       	 //Managing display of row's buttons and informations
+       	 badgeRow = $("#badgeRow"+idBadge);
+		 badgeRow.find(".badgeObtainedColumn").text("Yes");
+		 badgeRow.find(".addBadgeButton").hide();
+		 badgeRow.find(".removeBadgeButton").show();
+
+		 //Managing progression-bar 
+		 updateBadgeProgressBar(data["total"], data["trainerNbr"]);
+        
+       },
+       error : function (){
+       	alert('An error occured during the operation. Please, try again later.');
+       }
+   });
+}
 
 
 //Managing progression-bar 
