@@ -1,9 +1,14 @@
 class MegabookedexController < ApplicationController
+  #before_action :authenticate_trainer!
 
   # GET /megabookedex
   def index
     #@pokemons = Pokemon.all
+
+    ####### Badges managing ######
+    #Badges by Region
     @badges = Badge.all
+    @badgesTotal = @badges.count
     @regions = ["Kanto", "Johto", "Hoenn", "Sinnoh", "Unys", "Kalos"]
     @badgesByRegion = [[], [], [], [], [], []]
 
@@ -15,6 +20,10 @@ class MegabookedexController < ApplicationController
         end
       end
     end 
+
+    #Badges of trainer
+    #if current_trainer? != nil <TODO> Vérifier que le trainer n'est pas NIL
+    @trainerBadges = current_trainer.badges
   end
 
   # DELETE /trainers

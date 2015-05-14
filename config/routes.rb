@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   root 'pokemons#search'
 
   get 'megabookedex' => 'megabookedex#index'
+  get 'badges/removeFromTrainer/:id' => 'badges#removeFromTrainer'
+  get 'badges/addToTrainer/:id' => 'badges#addToTrainer'
 
   get 'search' => 'pokemons#search'
   get 'api/search' => 'pokemons#apisearch'
