@@ -13,8 +13,15 @@
     <div class="panel-body">
       <label for="">Progress:</label>
       <div class="progress">
-        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="53" aria-valuemin="0" aria-valuemax="100" style="width: 53%">
-          <span class="sr-only">53% Complete</span>30/56
+        <% @prctCompletion = ((@trainerBadges.count * 100)/ @badgesTotal) %> 
+        <div id="badgeProgressBar" class="progress-bar progress-bar-striped active" role="progressbar" 
+          aria-valuenow="<%= @prctCompletion %>" aria-valuemin="0" 
+          aria-valuemax="100" style="width: <%= @prctCompletion %>%">
+          
+          <span id="totalPrctCompletion" class="sr-only"><%= @prctCompletion %>% Complete</span>
+          <span id="totalBadges" style="display:<%= (@prctCompletion > 7)? '' : 'none'  %>">
+            <%= @trainerBadges.count %>/<%=@badgesTotal %>
+          </span>
         </div>
       </div>
       <div class="form-login">
@@ -39,17 +46,27 @@
                   <th>City</th>
                   <th>Type</th>
                   <th>Obtained</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
                 <% @badgesByRegion[n].each do |badge| %>
-                  <tr>
+                  <tr id="badgeRow<%= badge.id%>">
+                  <% @badgeInTrainerCollection = (@trainerBadges.include? badge) %> 
                     <td><img src="http://www.pokepedia.fr/<%= badge.picturelink %>"/></td>
                     <td><%= badge.name %></td>
                     <td><%= badge.champion %></td>
                     <td><%= badge.ville %></td>
                     <td><%= badge.typebadge %></td>
-                          <td><input type="checkbox" checked=""></td>
+                    <td class="badgeObtainedColumn"><%= (@badgeInTrainerCollection)? "Yes" : "No" %></td>
+                    <td class="badgeActionColumn">
+                        <button class="removeBadgeButton" onclick="removeBadgeById(<%= badge.id %>)"
+                          style="display:<%= @badgeInTrainerCollection? '' : 'none' %>"
+                        >Remove</button>
+                        <button class="addBadgeButton" onclick="addBadgeById(<%= badge.id %>)"
+                          style="display:<%= @badgeInTrainerCollection? 'none' : '' %>"
+                        >Add</button>
+                    </td>
                   </tr>
                 <% end %>
               </tbody>
