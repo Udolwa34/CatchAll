@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150511123511) do
+ActiveRecord::Schema.define(version: 20150514065729) do
 
   create_table "badges", force: :cascade do |t|
     t.integer  "number"
@@ -56,5 +56,13 @@ ActiveRecord::Schema.define(version: 20150511123511) do
   add_index "trainers", ["confirmation_token"], name: "index_trainers_on_confirmation_token", unique: true
   add_index "trainers", ["email"], name: "index_trainers_on_email", unique: true
   add_index "trainers", ["reset_password_token"], name: "index_trainers_on_reset_password_token", unique: true
+
+  create_table "trainers_badges", id: false, force: :cascade do |t|
+    t.integer "trainer_id"
+    t.integer "badge_id"
+  end
+
+  add_index "trainers_badges", ["badge_id"], name: "index_trainers_badges_on_badge_id"
+  add_index "trainers_badges", ["trainer_id"], name: "index_trainers_badges_on_trainer_id"
 
 end
