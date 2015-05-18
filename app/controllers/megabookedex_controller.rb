@@ -1,9 +1,12 @@
 class MegabookedexController < ApplicationController
-  # before_action :authenticate_trainer!
+  #before_action :authenticate_trainer!
 
   # GET /megabookedex
   def index
-    #@pokemons = Pokemon.all
+    ####### Pokemon managing ######
+    @pokemons = Pokemon.all.limit(18).order("number asc")
+    @pokemonTrainer = current_trainer.pokemons.select('pokemons.*, huntstates.state').where("number > 0 AND number <= 18")
+    @pokemonMax = Pokemon.all.count
 
     ####### Badges managing ######
     #Badges by Region
@@ -29,10 +32,10 @@ class MegabookedexController < ApplicationController
   # DELETE /trainers
   # DEV method only
   def deltrainers
-  	@trainers = Trainer.all
-  	@trainers.each do |trainer|
-  		trainer.destroy
-  	end
+    @trainers = Trainer.all
+    @trainers.each do |trainer|
+      trainer.destroy
+    end
     respond_to do |format|
       format.html { redirect_to root_url, notice: 'Trainers were successfully destroyed.' }
       format.json { head :no_content }
