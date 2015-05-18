@@ -193,12 +193,17 @@ footer > .container > p > a{
 	font-weight: lighter;
 }
 
-.bg-danger {
+.bg-danger, .bg-success {
 	text-align: center;
   	font-weight: bold;
   	color:#DD0000;
   	margin-top: 20px;
   	margin-bottom: 0px;
+}
+
+.bg-success {
+	padding: 8px 0;
+  	color: green !important;
 }
 
 #form-login li.active:hover{

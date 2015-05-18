@@ -39,9 +39,10 @@
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+    <div class="container">
+      <p class="notice" id="success"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+    </div>
 
 <%= yield %>
 
@@ -49,7 +50,18 @@
       <div class="container">
         <p>2015 © CatchAll | Developped by CCMP Corp.</p>
       </div>
-    </footer>
+  </footer>
 
+  <script type="text/javascript">
+    jQuery(document).ready(function() {
+      conteneurS = jQuery("#success");
+      if(conteneurS.html() != "")  {
+        conteneurS.addClass("bg-success");
+      }
+      else {
+        console.log(conteneurS.html());
+      }
+    });
+  </script>
 </body>
 </html>
