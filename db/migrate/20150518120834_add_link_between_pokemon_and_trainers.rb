@@ -5,5 +5,6 @@ class AddLinkBetweenPokemonAndTrainers < ActiveRecord::Migration
   		t.belongs_to :trainer, index: true
   		t.integer :viewed
   		t.integer :caught
+  	end
   end
 end
