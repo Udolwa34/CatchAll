@@ -1,6 +1,85 @@
 class PokemonsController < ApplicationController
-  before_action :set_pokemon, only: [:show, :edit, :update, :destroy]
-  # before_action :authenticate_trainer!
+  before_action :set_pokemon, only: [:show, :edit, :update, :destroy, :changeStateOfPokemon]
+  before_action :authenticate_trainer
+
+
+  def getPokemonByPage
+    @page = params[:page]
+    if @page == ""
+      #Throw Error
+      render nothing: true, :status => :forbidden
+    else 
+      #Rendering with some data 
+      @pokemons = Pokemon.all.limit(18).offset(18*(@page.to_i-1)).order("number asc")
+      @pokemonTrainer = current_trainer.pokemons.select('pokemons.*, huntstates.state').where(number: (18*(@page.to_i-1))..(18*@page.to_i))
+   
+      render json: { 
+        :pokemons => @pokemons, 
+        :pokemonTrainer => @pokemonTrainer
+      }, status: :ok
+    end
+  end
+  
+
+  #TODO ! Limiter l'accès en JSON seulement
+  #Changing state of a Pokemon from trainer's collection
+  def changeStateOfPokemon
+    @state = params[:state]
+    if (@state != "Viewed" && @state != "Caught" && @state != "None")
+      #Throw Error
+      render nothing: true, :status => :forbidden
+      return
+    end
+
+    if !@pokemon.trainers.exists?(current_trainer) 
+      if @state == "None"
+        #Throw Error
+        render nothing: true, :status => :forbidden
+        return
+      else
+        if @state == "Caught"
+          @pokemon.huntstates.create(:trainer => current_trainer, :state => "Caught")
+        else
+          @pokemon.huntstates.create(:trainer => current_trainer, :state => "Viewed")
+        end
+      end
+    else
+      if @state == "None"
+        @pokemon.trainers.delete(current_trainer)
+      else
+        @hunt = @pokemon.huntstates.where(:trainer => current_trainer)
+        if !@hunt.first.update({ :state => @state})
+          #Throw Error
+          render nothing: true, :status => :forbidden
+        end
+      end
+    end 
+    #Rendering with some data
+    #@pokemons = current_trainer.pokemons
+    #@hunts = current_trainer.huntstates
+    #render json: { :pkmn => @pokemons, :hunts => @hunts }, status: :ok
+  end
+
+
+  # GET /api/search
+  def apisearch
+    @valueRecherche = params[:search].to_s
+    @results = []
+    if @valueRecherche != ""
+      @results = Pokemon.where("name LIKE :name", {:name => "%"+@valueRecherche+"%"}).limit(10)
+    end
+    render :text => @results.to_json
+  end
+
+
+  # GET /search
+  def search
+    @maxPokemon = Pokemon.all.count
+  end
+
+
+
+
 
   # GET /pokemons
   # GET /pokemons.json
@@ -62,26 +141,6 @@ class PokemonsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
-
-  # GET /api/search
-  def apisearch
-    @valueRecherche = params[:search].to_s
-    @results = []
-    if @valueRecherche != ""
-      @results = Pokemon.where("name LIKE :name", {:name => "%"+@valueRecherche+"%"}).limit(10)
-    end
-
-    render :text => @results.to_json
-
-    #return @results.to_json
-  end
-
-  # GET /search
-  def search
-    @maxPokemon = Pokemon.all.count
-  end
-
 
   private
     # Use callbacks to share common setup or constraints between actions.
