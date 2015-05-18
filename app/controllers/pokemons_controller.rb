@@ -1,6 +1,6 @@
 class PokemonsController < ApplicationController
   before_action :set_pokemon, only: [:show, :edit, :update, :destroy]
-  #before_action :authenticate_trainer!
+  # before_action :authenticate_trainer!
 
   # GET /pokemons
   # GET /pokemons.json
