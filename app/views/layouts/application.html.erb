@@ -32,19 +32,23 @@
                 <li><a href="account.html">Account</a></li>
                 <li><a href="contact.html">Contact us</a></li>
                 <li class="divider"></li>
-                <li><a href="login.html">Logout</a></li>
+                <% if trainer_signed_in? %>
+                    <li>
+                    <%= link_to('Logout', destroy_trainer_session_path, :method => :delete) %>        
+                    </li>
+                  <% end %>
               </ul>
             </li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-    <div class="container">
+    <div class="container" id="bloc-infos">
       <p class="notice" id="success"><%= notice %></p>
       <p class="alert"><%= alert %></p>
     </div>
 
-<%= yield %>
+    <%= yield %>
 
 	<footer class="footer">
       <div class="container">
@@ -59,7 +63,7 @@
         conteneurS.addClass("bg-success");
       }
       else {
-        console.log(conteneurS.html());
+        jQuery("#bloc-infos").css("display","none");
       }
     });
   </script>
