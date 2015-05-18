@@ -198,10 +198,11 @@ footer > .container > p > a{
   	color:#DD0000;
   	margin-top: 20px;
   	margin-bottom: 0px;
+  	padding: 15px 0;
+  	border-radius: 4px;
 }
 
 .bg-success {
-	padding: 8px 0;
   	color: green !important;
 }
 
