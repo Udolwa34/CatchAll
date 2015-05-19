@@ -20,9 +20,9 @@
 <script type="text/javascript">
   jQuery(document).ready(function() {
     conteneur = jQuery("#error");
+    conteneurS = jQuery("#success");
     if(conteneur.html() != "") {
       conteneur.addClass("bg-danger");
-
       if($("#error").text() === "Invalid email or password."){
         $("#loginTab li:nth-child(1)").removeClass("active");
         $("#loginTab li:nth-child(1) a").removeClass("active");
@@ -41,8 +41,13 @@
         $("#reset").removeClass("active in");
       }
     }
+    else if(conteneurS.html() != "") {
+      conteneurS.addClass("bg-success");
+      conteneur.css("display","none");
+    }
     else {
       conteneur.css("display","none");
+      conteneurS.css("display","none");
     }
   });
 </script>
