@@ -25,7 +25,7 @@ class PokemonsController < ApplicationController
   #Changing state of a Pokemon from trainer's collection
   def changeStateOfPokemon
     @state = params[:state]
-    if (@state != "Viewed" && @state != "Caught" && @state != "None")
+    if (@state != "Seen" && @state != "Caught" && @state != "None")
       #Throw Error
       render nothing: true, :status => :forbidden
       return
@@ -63,10 +63,10 @@ class PokemonsController < ApplicationController
 
     #Rendering with some data
     @pokemons = current_trainer.pokemons
-      @ViewedNb = @pokemons.count
+      @SeenNb = @pokemons.count
       @CaughtNb = @pokemons.where('huntstates.caught = 1').count
 
-    render json: { :pkmn => @pokemons, :view => @ViewedNb, :caught => @CaughtNb }, status: :ok
+    render json: { :pkmn => @pokemons, :view => @SeenNb, :caught => @CaughtNb }, status: :ok
   end
 
 

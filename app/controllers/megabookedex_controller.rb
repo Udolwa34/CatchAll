@@ -9,7 +9,7 @@ class MegabookedexController < ApplicationController
       @pokemons = @pokemonsAll.limit(12).order("number asc")
     
     @allPokemonTrainer = current_trainer.pokemons
-      @ViewedNb = @allPokemonTrainer.count
+      @SeenNb = @allPokemonTrainer.count
       @CaughtNb = @allPokemonTrainer.where('huntstates.caught = 1').count
     @pokemonTrainer = @allPokemonTrainer.select('pokemons.*, huntstates.viewed, huntstates.caught').where("number > 0 AND number <= 12")
 

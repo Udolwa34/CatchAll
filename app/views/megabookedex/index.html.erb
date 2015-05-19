@@ -21,9 +21,9 @@
         <tbody>
           <tr>
             <td><span id="pkmnCaught"><%= @CaughtNb %></span> / <%= @pokemonMax %></td>
-            <td><span id="pkmnSeen"><%= @ViewedNb %></span> / <%= @pokemonMax %></td>
+            <td><span id="pkmnSeen"><%= @SeenNb %></span> / <%= @pokemonMax %></td>
             <td><span id="badgeObtained"><%= @trainerBadges.count %></span> / <%= @badgesTotal %></td>
-            <td id="trainerPoints"><%= (@trainerBadges.count + 1) * @CaughtNb * @ViewedNb %></td>
+            <td id="trainerPoints"><%= (@trainerBadges.count + 1) * @CaughtNb * @SeenNb %></td>
             <td><span>4137</span></td>
           </tr>
         </tbody>
@@ -39,8 +39,8 @@
           <div id="pkmnProgressBarCaught" class="progress-bar progress-bar-info" style="width: 0%">
             <span id="totalPrctCaught" style="display:'none'">Caught</span>
           </div>
-          <div id="pkmnProgressBarViewed" class="progress-bar progress-bar-warning" style="width:0%">
-            <span id="totalPrctViewed" style="display:'none'">Seen</span>
+          <div id="pkmnProgressBarSeen" class="progress-bar progress-bar-warning" style="width:0%">
+            <span id="totalPrctSeen" style="display:'none'">Seen</span>
           </div>
         </div>
             
@@ -88,7 +88,7 @@
                       </button>
                       <ul class="dropdown-menu" role="menu">
                         <li class="removeHuntButton" onclick="changeStateOfPokemon(<%= pokemon.number %>, 'None')" style="display:<%= (@pkmn == nil)? 'none' : '' %>"><a>None</a></li>
-                        <li class="addViewedHuntButton" onclick="changeStateOfPokemon(<%= pokemon.number %>, 'Viewed')" style="display:<%= (@pkmn == nil || (@pkmn != nil && @pkmn.caught == 1))? '' : 'none' %>"><a>Seen</a></li>
+                        <li class="addSeenHuntButton" onclick="changeStateOfPokemon(<%= pokemon.number %>, 'Seen')" style="display:<%= (@pkmn == nil || (@pkmn != nil && @pkmn.caught == 1))? '' : 'none' %>"><a>Seen</a></li>
                         <li class="addCaughtHuntButton" onclick="changeStateOfPokemon(<%= pokemon.number %>, 'Caught')" style="display:<%= (@pkmn == nil || (@pkmn != nil && @pkmn.caught == 0))? '' : 'none' %>"><a>Caught</a></li>
                       </ul>
                     </div>

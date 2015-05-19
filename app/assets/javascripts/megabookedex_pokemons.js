@@ -93,19 +93,19 @@ function updatePokemonProgressBarAndRankingData(countPkmnCaught, countPkmnSeen){
   prctCaught = ((countPkmnCaught * 100)/ maxPokemon);
   prctSeen = (((countPkmnSeen - countPkmnCaught) * 100) / maxPokemon)
   $("#pkmnProgressBarCaught").css("width", prctCaught+"%");
-  $("#pkmnProgressBarViewed").css("width", prctSeen+"%");
+  $("#pkmnProgressBarSeen").css("width", prctSeen+"%");
 
   if ( prctCaught > 7 ){ $("#totalPrctCaught").show();} 
   else { $("#totalPrctCaught").hide();}
-  if ( prctSeen > 7 ){ $("#totalPrctViewed").show();} 
-  else { $("#totalPrctViewed").hide();}
+  if ( prctSeen > 7 ){ $("#totalPrctSeen").show();} 
+  else { $("#totalPrctSeen").hide();}
 
 
   //Update ranking's data
   $("#pkmnCaught").text(countPkmnCaught)
-  $("#pkmnSeen").text(countPkmnViewed)
+  $("#pkmnSeen").text(countPkmnSeen)
   $("#trainerPoints").text(
-    parseInt(countPkmnCaught) * parseInt(countPkmnViewed) * (parseInt($("#badgeObtained").text()) + 1))
+    parseInt(countPkmnCaught) * parseInt(countPkmnSeen) * (parseInt($("#badgeObtained").text()) + 1))
 } 
 
 
@@ -136,16 +136,16 @@ function changeColorStatePokemon(numPkmn, state){
     pokemonBtnState.removeClass("btn-warning");
     pokemonBtnState.addClass("btn-danger");
     pokemonRow.find(".removeHuntButton").hide();
-    pokemonRow.find(".addViewedHuntButton").show();
+    pokemonRow.find(".addSeenHuntButton").show();
     pokemonRow.find(".addCaughtHuntButton").show();
 
-  } else if ( state == "Viewed" ) {
-    pokemonBtnState.text("Viewed ").append("<span class='caret'></span>");
+  } else if ( state == "Seen" ) {
+    pokemonBtnState.text("Seen ").append("<span class='caret'></span>");
     pokemonBtnState.removeClass("btn-danger");
     pokemonBtnState.removeClass("btn-info");
     pokemonBtnState.addClass("btn-warning");
     pokemonRow.find(".removeHuntButton").show();
-    pokemonRow.find(".addViewedHuntButton").hide();
+    pokemonRow.find(".addSeenHuntButton").hide();
     pokemonRow.find(".addCaughtHuntButton").show();
 
   } else {
@@ -154,7 +154,7 @@ function changeColorStatePokemon(numPkmn, state){
     pokemonBtnState.removeClass("btn-warning");
     pokemonBtnState.addClass("btn-info");
     pokemonRow.find(".removeHuntButton").show();
-    pokemonRow.find(".addViewedHuntButton").show();
+    pokemonRow.find(".addSeenHuntButton").show();
     pokemonRow.find(".addCaughtHuntButton").hide();
   }
 }
@@ -204,7 +204,7 @@ function getPokemonByPage(numberPage){
                         </button>
                         <ul class="dropdown-menu" role="menu">
                           <li class="removeHuntButton" onclick="changeStateOfPokemon(' + <%= pokemon.number %> + ', 'None')" style="display:' + <%= (@pkmn == nil)? 'none' : '' %> + '"><a>None</a></li>
-                          <li class="addViewedHuntButton" onclick="changeStateOfPokemon(' + <%= pokemon.number %> + ', 'Viewed')" style="display:' + <%= (@pkmn == nil || (@pkmn != nil && @pkmn.caught == 1))? '' : 'none' %> + '"><a>Seen</a></li>
+                          <li class="addSeenHuntButton" onclick="changeStateOfPokemon(' + <%= pokemon.number %> + ', 'Seen')" style="display:' + <%= (@pkmn == nil || (@pkmn != nil && @pkmn.caught == 1))? '' : 'none' %> + '"><a>Seen</a></li>
                           <li class="addCaughtHuntButton" onclick="changeStateOfPokemon(' + <%= pokemon.number %> + ', 'Caught')" style="display: ' + <%= (@pkmn == nil || (@pkmn != nil && @pkmn.caught == 0))? '' : 'none' %> + '"><a>Caught</a></li>
                         </ul>
                       </div>
