@@ -217,11 +217,15 @@ footer > .container > p > a{
 /*--------------------Ranking---------------------*/
 .thumbnail{
 	font-weight: lighter;
+	min-width: 150px;
+	min-height: 160px;
+	margin-top: 25px;
 }
 
 .thumbnail h1{
 	text-align: center;
 }
+
 
 .thumbnail p{
 	text-align: center;
@@ -234,6 +238,10 @@ footer > .container > p > a{
 	max-height: 150px;
 	margin: auto;
 	width: 100%;
+}
+
+.thumbnail:hover{
+	background: transparent;
 }
 
 .table td{
@@ -311,6 +319,25 @@ footer > .container > p > a{
 
 .removeBadgeButton:hover {
 	background-color: #C06785;
+}
+
+.huntActionColumn{
+	margin-top: 0px;
+}
+
+.thumbnail h4{
+	text-align: center;
+	margin-top: 20px;
+}
+
+.thumbnail .pokemonImg{
+	min-width: 150px;
+	min-height: 150px;
+	text-align: center;
+}
+
+.huntActionButton button{
+	width: 49%;
 }
 
 

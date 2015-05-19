@@ -6,12 +6,12 @@ class MegabookedexController < ApplicationController
     ####### Pokemon managing ######
     @pokemonsAll = Pokemon.all
       @pokemonMax = @pokemonsAll.count
-      @pokemons = @pokemonsAll.limit(18).order("number asc")
+      @pokemons = @pokemonsAll.limit(12).order("number asc")
     
     @allPokemonTrainer = current_trainer.pokemons
       @ViewedNb = @allPokemonTrainer.count
       @CaughtNb = @allPokemonTrainer.where('huntstates.caught = 1').count
-    @pokemonTrainer = @allPokemonTrainer.select('pokemons.*, huntstates.viewed, huntstates.caught').where("number > 0 AND number <= 18")
+    @pokemonTrainer = @allPokemonTrainer.select('pokemons.*, huntstates.viewed, huntstates.caught').where("number > 0 AND number <= 12")
 
 
     ####### Badges managing ######
