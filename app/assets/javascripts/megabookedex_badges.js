@@ -48,7 +48,7 @@ function addBadgeById(idBadge){
 //Managing progression-bar 
 function updateBadgeProgressBar(badgesTotal, trainerBadgesCount){
 	$("#badgeObtained").text(trainerBadgesCount);
-	$("#trainerPoints").text(parseInt($("#pkmnCaught").text()) * parseInt($("#pkmnSeen").text()) * (trainerBadgesCount + 1));
+	$("#trainerPoints").text(parseInt($("#pkmnCaught").text()) * parseInt($("#pkmnSeen").text()) * (parseInt(trainerBadgesCount) + 1));
 	 prctCompletion = ((trainerBadgesCount * 100)/ badgesTotal);
 	 $("#badgeProgressBar").attr("aria-valuenow", prctCompletion);
 	 $("#badgeProgressBar").css("width", prctCompletion+"%");

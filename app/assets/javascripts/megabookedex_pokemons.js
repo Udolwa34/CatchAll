@@ -106,8 +106,8 @@ function getPokemonByPage(numberPage){
        		for ( var i = 0; i < data["pokemonTrainer"].length; i++){
 
        			plop += data["pokemonTrainer"][i].name + data["pokemonTrainer"][i].state;
-            pkmnList.append(
-                  /*<% if (@pokemonTrainer.include? pokemon) %>
+            /*pkmnList.append(
+                  <% if (@pokemonTrainer.include? pokemon) %>
                     <% @pkmn = @pokemonTrainer.find(pokemon.id) %>
                   <% else %>
                     <% @pkmn = nil %>
@@ -138,8 +138,8 @@ function getPokemonByPage(numberPage){
                       </div>
                     </div>
                     
-                  </div>'*/
-            );
+                  </div>'
+            );*/
        		  
 
           }
@@ -172,10 +172,9 @@ function changeStateOfPokemon(numPkmn, state){
        success: function (data) {
 
        	changeColorStatePokemon(state);
-        console.log(data);
         $("#pkmnCaught").text(data.caught)
         $("#pkmnSeen").text(data.view)
-        $("#trainerPoints").text(data.caught * data.view * (parseInt($("#badgeObtain").text()) + 1))
+        $("#trainerPoints").text(parseInt(data.caught) * parseInt(data.view) * (parseInt($("#badgeObtained").text()) + 1))
 
        },
        error : function (){
