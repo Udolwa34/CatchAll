@@ -4,14 +4,23 @@
   <div class="introduction page-header">
     <h1>Megabookedex</h1>
     <h3>The Ultimate Book which gather all your Pokemon and badges.</h3>
-    
   </div>
 </div>
 
 <div class="Test">
-<span id="maxPokemonPage" style="display:none"><%= @pokemonMax/18 %></span>
+<button id="goToFirstPage">First</button>
 <button id="goToPrevPage">Prev</button>
+
+<div id="navButtons">
+  <button class="goToPage">5</button>
+  <button class="goToPage">12</button>
+  <button class="goToPage">35</button>
+</div>
+
 <button id="goToNextPage">Next</button>
+<button id="goToLastPage">Last</button>
+
+
 <div id="resultsPKMN"></div>
 <div id="resultsPKMNTrainer"></div>
 <table>

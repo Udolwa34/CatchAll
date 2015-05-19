@@ -13,6 +13,7 @@ class MegabookedexController < ApplicationController
       @CaughtNb = @allPokemonTrainer.where('huntstates.caught = 1').count
     @pokemonTrainer = @allPokemonTrainer.select('pokemons.*, huntstates.viewed, huntstates.caught').where("number > 0 AND number <= 18")
 
+
     ####### Badges managing ######
     #Badges by Region
     @badges = Badge.all
