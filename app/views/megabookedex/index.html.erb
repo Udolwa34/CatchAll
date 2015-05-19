@@ -7,6 +7,7 @@
   </div>
 
   <div class="panel panel-default">
+    <div id="hid_maxPokemon" style="display:none"><%= @pokemonMax %></div>
     <div class="panel-heading">Summary</div>
     <div class="panel-body">
       <table class="table">
@@ -31,96 +32,74 @@
   </div>
 
   <div class="panel panel-default">
-        <div class="panel-heading">Pokemons</div>
-            <div class="panel-body">  
-              <label for="">Progress:</label>
-              <div class="progress">
-                <% @prctCompletionCaught = (((@CaughtNb) * 100)/ @pokemonMax) %>
-                <% @prctCompletionViewed = ((@ViewedNb * 100)/ @pokemonMax) %>
-                <div id="pkmnProgressBarCaught" class="progress-bar progress-bar-success" 
-                  style="width: <%= @prctCompletionCaught %>%">
-                  <span id="totalPrctCaught"
-                    style="display:<%= (@prctCompletionCaught > 7)? '' : 'none'  %>"
-                    >Caught</span>
-                </div>
-                <div id="pkmnProgressBarViewed" class="progress-bar progress-bar-danger" 
-                  style="width: <%= @prctCompletionViewed %>%">
-                  <span id="totalPrctViewed"
-                    style="display:<%= (@prctCompletionViewed > 7)? '' : 'none'  %>"
-                   >Seen</span>
-              </div>
-            </div>
-            
-            <nav style="margin-bottom:-10px">
-              <ul class="pagination">
-                <li id="goToFirstPage">
-                  <a aria-label="First">First</a>
-                </li>
-                <li id="goToPrevPage">
-                  <a aria-label="Previous">Previous</a>
-                </li>
-              </ul>
-              <ul class="pagination" id="navButtons">
-                  
-              </ul>
-              <ul class="pagination">
-                <li id="goToNextPage">
-                  <a aria-label="Next">Next</a>
-                </li>
-                <li id="goToLastPage">
-                  <a aria-label="Last">Last</a>
-                </li>
-              </ul>
-            </nav>
-
-            <div class="Test">
-
-
-
-              <div id="resultsPKMN"></div>
-              <div id="resultsPKMNTrainer"></div>
-            </div>
-
-            <div>
-              <div class="row" id="pkmnList">
-                <% @pokemons.each do |pokemon| %>
-                  <% if (@pokemonTrainer.include? pokemon) %>
-                    <% @pkmn = @pokemonTrainer.find(pokemon.id) %>
-                  <% else %>
-                    <% @pkmn = nil %>
-                  <% end %>
-                  <div id="pkmnRow<%= pokemon.id%>" class="col-xs-12 col-md-3 col-sm-6">
-                    <div class="thumbnail">
-                      <h4>#<%= pokemon.number %> - <%= pokemon.name %></h4>
-                      <hr>
-                      <div class="pokemonImg">
-                        <%= image_tag("pokemon/"+pokemon.smallpicturelink+".png") %>
-                      </div>
-                      <div class="caption huntActionColumn">
-                        <div class="btn-group" style="width:100%">
-                          <button type="button" class="btnState btn btn-block dropdown-toggle
-                          <%= (@pkmn == nil)? 'btn-danger' : '' %>
-                          <%= (@pkmn != nil && @pkmn.caught == 0)? 'btn-warning' : '' %>
-                          <%= (@pkmn != nil && @pkmn.caught == 1)? 'btn-info' : '' %>" data-toggle="dropdown" aria-expanded="false">
-                          <%= (@pkmn == nil)? 'None' : '' %>
-                          <%= (@pkmn != nil && @pkmn.caught == 0)? 'Seen' : '' %>
-                          <%= (@pkmn != nil && @pkmn.caught == 1)? 'Caught' : '' %> <span class="caret"></span>
-                          </button>
-                          <ul class="dropdown-menu" role="menu">
-                            <li class="removeHuntButton" onclick="changeStateOfPokemon(<%= pokemon.number %>, 'None')" style="display:<%= (@pkmn == nil)? 'none' : '' %>"><a>None</a></li>
-                            <li class="addViewedHuntButton" onclick="changeStateOfPokemon(<%= pokemon.number %>, 'Viewed')" style="display:<%= (@pkmn == nil || (@pkmn != nil && @pkmn.caught == 1))? '' : 'none' %>"><a>Seen</a></li>
-                            <li class="addCaughtHuntButton" onclick="changeStateOfPokemon(<%= pokemon.number %>, 'Caught')" style="display:<%= (@pkmn == nil || (@pkmn != nil && @pkmn.caught == 0))? '' : 'none' %>"><a>Caught</a></li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    
-                  </div>
-                <% end %>
-              </div>
-            </div>
+    <div class="panel-heading">Pokémon</div>
+      <div class="panel-body">  
+        <label for="">Progress:</label>
+        <div class="progress">
+          <div id="pkmnProgressBarCaught" class="progress-bar progress-bar-info" style="width: 0%">
+            <span id="totalPrctCaught" style="display:'none'">Caught</span>
+          </div>
+          <div id="pkmnProgressBarViewed" class="progress-bar progress-bar-warning" style="width:0%">
+            <span id="totalPrctViewed" style="display:'none'">Seen</span>
+          </div>
         </div>
-      </div>
+            
+        <nav style="margin-bottom:-10px">
+          <ul class="pagination">
+            <li id="goToFirstPage"><a aria-label="First">First</a></li>
+            <li id="goToPrevPage"><a aria-label="Previous">Previous</a></li>
+          </ul>
+          <ul class="pagination" id="navButtons"></ul>
+          <ul class="pagination">
+            <li id="goToNextPage"><a aria-label="Next">Next</a></li>
+            <li id="goToLastPage"><a aria-label="Last">Last</a></li>
+          </ul>
+        </nav>
+
+        <div class="Test">
+          <div id="resultsPKMN"></div>
+          <div id="resultsPKMNTrainer"></div>
+        </div>
+
+        <div>
+          <div class="row" id="pkmnList">
+            <% @pokemons.each do |pokemon| %>
+              <% if (@pokemonTrainer.include? pokemon) %>
+                <% @pkmn = @pokemonTrainer.find(pokemon.id) %>
+              <% else %>
+                <% @pkmn = nil %>
+              <% end %>
+              <div id="pkmnRow<%= pokemon.id%>" class="col-xs-12 col-md-3 col-sm-6">
+                <div class="thumbnail">
+                  <h4>#<%= pokemon.number %> - <%= pokemon.name %></h4>
+                  <hr>
+                  <div class="pokemonImg">
+                    <%= image_tag("pokemon/"+pokemon.smallpicturelink+".png") %>
+                  </div>
+                  <div class="caption huntActionColumn">
+                    <div class="btn-group" style="width:100%">
+                      <button type="button" class="btnState btn btn-block dropdown-toggle
+                      <%= (@pkmn == nil)? 'btn-danger' : '' %>
+                      <%= (@pkmn != nil && @pkmn.caught == 0)? 'btn-warning' : '' %>
+                      <%= (@pkmn != nil && @pkmn.caught == 1)? 'btn-info' : '' %>" data-toggle="dropdown" aria-expanded="false">
+                      <%= (@pkmn == nil)? 'None' : '' %>
+                      <%= (@pkmn != nil && @pkmn.caught == 0)? 'Seen' : '' %>
+                      <%= (@pkmn != nil && @pkmn.caught == 1)? 'Caught' : '' %> <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu" role="menu">
+                        <li class="removeHuntButton" onclick="changeStateOfPokemon(<%= pokemon.number %>, 'None')" style="display:<%= (@pkmn == nil)? 'none' : '' %>"><a>None</a></li>
+                        <li class="addViewedHuntButton" onclick="changeStateOfPokemon(<%= pokemon.number %>, 'Viewed')" style="display:<%= (@pkmn == nil || (@pkmn != nil && @pkmn.caught == 1))? '' : 'none' %>"><a>Seen</a></li>
+                        <li class="addCaughtHuntButton" onclick="changeStateOfPokemon(<%= pokemon.number %>, 'Caught')" style="display:<%= (@pkmn == nil || (@pkmn != nil && @pkmn.caught == 0))? '' : 'none' %>"><a>Caught</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+    </div>
+  </div>
 </div>
 
 <div class="container">
