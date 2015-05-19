@@ -1,0 +1,26 @@
+<div id="contactHeader">
+  	<h1>
+    	Do you have questions?
+  	</h1>
+	<h1>
+	   You saw a mistake or bug?
+	</h1>
+  	<h1>Send us a message!</h1>
+</div>
+
+<div class="container">
+	<div class="page-header">
+    <h1>Contact</h1>
+  </div>
+	<%= simple_form_for @contact, :html => {:id => 'contactForm' } do |f| %>
+    <%= label_tag 'subject', 'Subject' %>
+    <%= f.text_field :subject, :required => true, :class =>'form-control', :placeholder=>"I love your website <3" %>
+    <%= label_tag 'message', 'Message' %>
+    <%= text_area(:message, :f, cols: 20, rows: 40, class: 'form-control form-textarea required', placeholder: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id placeat numquam amet earum est at accusamus ea error eum, iure necessitatibus autem voluptatum, nam. Suscipit tenetur maxime earum, debitis veniam quod nihil quis dolorum totam officiis autem rerum, perspiciatis soluta! Suscipit corrupti consectetur modi reprehenderit aliquam quaerat minima impedit veniam explicabo, eligendi deserunt aspernatur aut repellendus praesentium a dignissimos sit numquam. Consectetur tempora, quia, vel excepturi in autem quam earum, obcaecati esse totam repellendus suscipit maxime fugit. Laudantium sit impedit labore illum ut quod consequuntur nesciunt voluptates rem perferendis. Fuga itaque, ratione blanditiis debitis consequuntur? A maxime eligendi ea sit minus, nisi. Nemo fugiat eos voluptates recusandae culpa saepe eius velit neque id, fugit laboriosam quae quam ab incidunt adipisci debitis temporibus quia, dolorem molestias reiciendis beatae quas laborum earum. Temporibus dolor ab culpa ex cum tempore magnam, non quae, facere ratione, explicabo. Ullam, veniam, iste. Culpa dolorum, minus quam minima dolores delectus quidem dolore eius alias voluptatum saepe, fugiat natus non, eum obcaecati. Eius aut minus dolorem molestiae id sequi veritatis dolore delectus repellendus assumenda temporibus obcaecati fugit atque accusamus, quidem, deleniti eum saepe, rerum quia cumque facilis ullam officiis velit nostrum. Aliquam praesentium iste, ut blanditiis maiores saepe magni tempora ea quos reprehenderit beatae, magnam? Obcaecati error, reprehenderit deserunt eius debitis ipsa eum dolore voluptates delectus? Est repellendus porro nemo veniam provident. Amet ipsam optio minus nisi nihil, sint, molestiae dolores mollitia ut libero reiciendis saepe ea. Repellendus mollitia odio vitae facilis? Voluptatibus saepe modi blanditiis, atque quibusdam velit voluptates fugit cumque maxime, et soluta corporis eum ipsam nisi! Maiores soluta, necessitatibus nihil voluptas magnam atque non ab consectetur quos ipsa explicabo dolores assumenda sequi mollitia facere temporibus provident deserunt voluptates. Qui odit quos sint maiores aspernatur consequuntur non praesentium! Dignissimos, ipsa, minus tempore saepe distinctio pariatur laboriosam!") %>
+    <div class= "hidden">
+      <%= f.input :nickname, :hint => 'Leave this field blank!' %>
+      <%= f.text_field :reply, :value => @trainer.email %>
+    </div>
+    <%= f.button :submit, 'Send', :class=> "btn btn-purple" %>
+  <% end %>
+</div>

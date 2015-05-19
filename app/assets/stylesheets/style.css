@@ -282,6 +282,11 @@ footer > .container > p > a{
 	font-weight:lighter;
 }
 
+#contactForm .btn-purple {
+	width: 100%;
+	font-size: 18px;
+}
+
 /*---------------------- MegaBookedex ---------------*/
 
 .grayScale{

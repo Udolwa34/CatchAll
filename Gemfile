@@ -35,6 +35,10 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Using of Devise Gem
 gem 'devise'
 
+# Using of contact form gem
+gem 'mail_form'
+gem 'simple_form'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -47,5 +51,7 @@ group :development, :test do
 
   gem "better_errors"
   gem "binding_of_caller"
+
+
 end
 
