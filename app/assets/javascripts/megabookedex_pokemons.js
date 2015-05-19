@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	//Definition of page number
 	var page = 1;
-	var pageMax = 40;
+	var pageMax = 60;
 
   ////////////////////////////Navigation buttons///////////////////////////////
   //Going on previous page
@@ -114,15 +114,41 @@ function changeStateOfPokemon(numPkmn, state){
        dataType: 'json',
        success: function (data) {
 
+        pokemonRow = $("#pkmnRow"+numPkmn);
+        pokemonBtnState = pokemonRow.find(".btnState");
+
        	if ( state == "None"){
        		//Cacher/Disabled boutons "Remove", afficher boutons "Viewed/Caught"
        		//Faire modifications nécessaires pour faire passer le design à "None"
+          pokemonBtnState.text("None ").append("<span class='caret'></span>");
+          pokemonBtnState.removeClass("btn-info");
+          pokemonBtnState.removeClass("btn-warning");
+          pokemonBtnState.addClass("btn-danger");
+          pokemonRow.find(".removeHuntButton").hide();
+          pokemonRow.find(".addViewedHuntButton").show();
+          pokemonRow.find(".addCaughtHuntButton").show();
+
        	} else if ( state == "Viewed" ) {
         	//Cacher/Disabled boutons "Viewed", afficher boutons "Remove/Caught"
         	//Faire modifications nécessaires pour faire passer le design à "Viewed"
+          pokemonBtnState.text("Viewed ").append("<span class='caret'></span>");
+          pokemonBtnState.removeClass("btn-danger");
+          pokemonBtnState.removeClass("btn-info");
+          pokemonBtnState.addClass("btn-warning");
+          pokemonRow.find(".removeHuntButton").show();
+          pokemonRow.find(".addViewedHuntButton").hide();
+          pokemonRow.find(".addCaughtHuntButton").show();
+
         } else {
         	//Cacher/Disabled boutons "Caught", afficher boutons "Remove/Viewed"
         	//Faire modifications nécessaires pour faire passer le design à "Caught"
+          pokemonBtnState.text("Caught ").append("<span class='caret'></span>");
+          pokemonBtnState.removeClass("btn-danger");
+          pokemonBtnState.removeClass("btn-warning");
+          pokemonBtnState.addClass("btn-info");
+          pokemonRow.find(".removeHuntButton").show();
+          pokemonRow.find(".addViewedHuntButton").show();
+          pokemonRow.find(".addCaughtHuntButton").hide();
         }
 
        },

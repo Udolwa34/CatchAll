@@ -5,62 +5,144 @@
     <h1>Megabookedex</h1>
     <h3>The Ultimate Book which gather all your Pokemon and badges.</h3>
   </div>
-</div>
 
-<div class="Test">
-<button id="goToFirstPage">First</button>
-<button id="goToPrevPage">Prev</button>
+  <div class="panel panel-default">
+    <div class="panel-heading">Summary</div>
+    <div class="panel-body">
+      <table class="table">
+        <thead>
+          <th>Pokemons caught</th>
+          <th>Pokemons seen</th>
+          <th>Badges obtained</th>
+          <th>Points</th>
+          <th>Rank</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= @CaughtNb %> / <%= @pokemonMax %></td>
+            <td><%= @ViewedNb %> / <%= @pokemonMax %></td>
+            <td><%= @trainerBadges.count %> / <%= @badgesTotal %></td>
+            <td><%= (@trainerBadges.count + 1) * @CaughtNb * @ViewedNb %></td>
+            <td>4137</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
-<div id="navButtons">
-  <button class="goToPage">5</button>
-  <button class="goToPage">12</button>
-  <button class="goToPage">35</button>
-</div>
+  <div class="panel panel-default">
+        <div class="panel-heading">Pokemons</div>
+          <div class="panel-body">
+        
+              <label for="">Progress:</label>
+              <div class="progress">
+                <div class="progress-bar progress-bar-success" style="width: 35%">
+                  <span class="sr-only">35% Complete (success)</span>Caught
+                </div>
+                <div class="progress-bar progress-bar-danger" style="width: 10%">
+                  <span class="sr-only">10% Complete (danger)</span>Seen
+              </div>
+            </div>
+            
+            <nav style="margin-bottom:-10px">
+              <ul class="pagination">
+                <li id="goToFirstPage" disableds>
+                  <a aria-label="First">First</a>
+                </li>
+                <li id="goToPrevPage" disabled>
+                  <a aria-label="Previous">Previous</a>
+                </li>
+                <li><a>1</a></li>
+                <li><a>2</a></li>
+                <li><a>3</a></li>
+                <li><a>...</a></li>
+                <li><a>32</a></li>
+                <li><a>33</a></li>
+                <li id="goToNextPage">
+                  <a aria-label="Next">Next</a>
+                </li>
+                <li id="goToLastPage">
+                  <a aria-label="Last">Last</a>
+                </li>
+              </ul>
+            </nav>
 
-<button id="goToNextPage">Next</button>
-<button id="goToLastPage">Last</button>
+            <div class="Test">
+
+              <div id="navButtons">
+                <button class="goToPage">5</button>
+                <button class="goToPage">12</button>
+                <button class="goToPage">35</button>
+              </div>
 
 
-<div id="resultsPKMN"></div>
-<div id="resultsPKMNTrainer"></div>
-<table>
-  <thead>
-    <tr>
-      <th>Number</th>
-      <th>Name</th>
-      <th>Picturelink</th>
-      <th>Smallpicturelink</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+              <div id="resultsPKMN"></div>
+              <div id="resultsPKMNTrainer"></div>
+            </div>
 
-  <tbody>
-    <% @pokemons.each do |pokemon| %>
-      <% if (@pokemonTrainer.include? pokemon) %>
-        <% @pkmn = @pokemonTrainer.find(pokemon.id) %>
-      <% else %>
-        <% @pkmn = nil %>
-      <% end %>
-      <tr id="pkmnRow<%= pokemon.id%>">
-        <td><%= pokemon.number %></td>
-        <td><%= pokemon.name %></td>
-        <td><%= pokemon.picturelink  %></td>
-        <td><%= image_tag("pokemon/"+pokemon.smallpicturelink+".png") %></td>
-        <td class="huntActionColumn">
-          <button class="removeHuntButton" onclick="changeStateOfPokemon(<%= pokemon.number %>, 'None')"
-          style="display:<%= (@pkmn == nil)? 'none' : '' %>"
-          >Remove</button>
-          <button class="addViewedHuntButton" onclick="changeStateOfPokemon(<%= pokemon.number %>, 'Viewed')"
-          style="display:<%= (@pkmn == nil || (@pkmn != nil && @pkmn.caught == 1))? '' : 'none' %>"
-          >Viewed</button>
-          <button class="addCaughtHuntButton" onclick="changeStateOfPokemon(<%= pokemon.number %>, 'Caught')"
-          style="display:<%= (@pkmn == nil || (@pkmn != nil && @pkmn.caught == 0))? '' : 'none' %>"
-          >Caught</button>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+            <div>
+              <div class="row">
+                <% @pokemons.each do |pokemon| %>
+                  <% if (@pokemonTrainer.include? pokemon) %>
+                    <% @pkmn = @pokemonTrainer.find(pokemon.id) %>
+                  <% else %>
+                    <% @pkmn = nil %>
+                  <% end %>
+                  <div id="pkmnRow<%= pokemon.id%>" class="col-xs-12 col-md-3 col-sm-6">
+                    <div class="thumbnail">
+                      <h4>#<%= pokemon.number %> - <%= pokemon.name %></h4>
+                      <hr>
+                      <div class="pokemonImg">
+                        <%= image_tag("pokemon/"+pokemon.smallpicturelink+".png") %>
+                      </div>
+                      <div class="caption huntActionColumn">
+                        <div class="btn-group" style="width:100%">
+                          <button type="button" class="btnState btn btn-block dropdown-toggle
+                          <%= (@pkmn == nil)? 'btn-danger' : '' %>
+                          <%= (@pkmn != nil && @pkmn.caught == 0)? 'btn-warning' : '' %>
+                          <%= (@pkmn != nil && @pkmn.caught == 1)? 'btn-info' : '' %>" data-toggle="dropdown" aria-expanded="false">
+                          <%= (@pkmn == nil)? 'None' : '' %>
+                          <%= (@pkmn != nil && @pkmn.caught == 0)? 'Seen' : '' %>
+                          <%= (@pkmn != nil && @pkmn.caught == 1)? 'Caught' : '' %> <span class="caret"></span>
+                          </button>
+                          <ul class="dropdown-menu" role="menu">
+                            <li class="removeHuntButton" onclick="changeStateOfPokemon(<%= pokemon.number %>, 'None')" style="display:<%= (@pkmn == nil)? 'none' : '' %>"><a>None</a></li>
+                            <li class="addViewedHuntButton" onclick="changeStateOfPokemon(<%= pokemon.number %>, 'Viewed')" style="display:<%= (@pkmn == nil || (@pkmn != nil && @pkmn.caught == 1))? '' : 'none' %>"><a>Seen</a></li>
+                            <li class="addCaughtHuntButton" onclick="changeStateOfPokemon(<%= pokemon.number %>, 'Caught')" style="display:<%= (@pkmn == nil || (@pkmn != nil && @pkmn.caught == 0))? '' : 'none' %>"><a>Caught</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    
+                  </div>
+                <% end %>
+              </div>
+            </div>
+
+            <nav style="margin-top:-25px">
+              <ul class="pagination">
+                <li>
+                  <a href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                  </a>
+                </li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a>...</a></li>
+                <li><a href="#">32</a></li>
+                <li><a href="#">33</a></li>
+                <li>
+                  <a href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+
+
+        </div>
+      </div>
 </div>
 
 <div class="container">
