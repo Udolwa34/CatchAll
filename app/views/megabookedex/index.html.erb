@@ -107,10 +107,10 @@
                     <td><%= badge.typebadge %></td>
                     <td class="badgeObtainedColumn"><%= (@badgeInTrainerCollection)? "Yes" : "No" %></td>
                     <td class="badgeActionColumn">
-                        <button class="removeBadgeButton" onclick="removeBadgeById(<%= badge.id %>)"
+                        <button class="btn btn-purple removeBadgeButton" onclick="removeBadgeById(<%= badge.id %>)"
                           style="display:<%= @badgeInTrainerCollection? '' : 'none' %>"
                         >Remove</button>
-                        <button class="addBadgeButton" onclick="addBadgeById(<%= badge.id %>)"
+                        <button class="btn btn-purple addBadgeButton" onclick="addBadgeById(<%= badge.id %>)"
                           style="display:<%= @badgeInTrainerCollection? 'none' : '' %>"
                         >Add</button>
                     </td>
