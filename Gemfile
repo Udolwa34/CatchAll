@@ -35,6 +35,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Using of Devise Gem
 gem 'devise'
 
+#Using of Mustache Gem
+gem 'mustache-js-rails', '~> 1.1.0'
+
 # Using of contact form gem
 gem 'mail_form'
 gem 'simple_form'
