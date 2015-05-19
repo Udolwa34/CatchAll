@@ -54,6 +54,10 @@ footer > .container > p > a{
 	text-decoration: underline;
 }
 
+.noMarginBottom{
+	margin-bottom: -60px !important;
+}
+
 .navbar-default{
 	background-color: white;
 	border:none;
@@ -305,6 +309,9 @@ footer > .container > p > a{
 	background-color: #D87093;
 }
 
+.removeBadgeButton:hover {
+	background-color: #C06785;
+}
 
 
 
