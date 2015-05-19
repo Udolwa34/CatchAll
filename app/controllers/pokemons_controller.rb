@@ -1,6 +1,6 @@
 class PokemonsController < ApplicationController
   before_action :set_pokemon, only: [:show, :edit, :update, :destroy, :changeStateOfPokemon]
-  before_action :authenticate_trainer
+  before_action :authenticate_trainer!
 
 
   def getPokemonByPage
@@ -11,8 +11,8 @@ class PokemonsController < ApplicationController
     else 
       #Rendering with some data 
       @pokemons = Pokemon.all.limit(18).offset(18*(@page.to_i-1)).order("number asc")
-      @pokemonTrainer = current_trainer.pokemons.select('pokemons.*, huntstates.state').where(number: (18*(@page.to_i-1))..(18*@page.to_i))
-   
+      @pokemonTrainer = current_trainer.pokemons.select('pokemons.*, huntstates.viewed, huntstates.caught').where(number: (18*(@page.to_i-1))..(18*@page.to_i))
+
       render json: { 
         :pokemons => @pokemons, 
         :pokemonTrainer => @pokemonTrainer
@@ -38,9 +38,9 @@ class PokemonsController < ApplicationController
         return
       else
         if @state == "Caught"
-          @pokemon.huntstates.create(:trainer => current_trainer, :state => "Caught")
+          @pokemon.huntstates.create(:trainer => current_trainer, :viewed => 1, :caught => 1)
         else
-          @pokemon.huntstates.create(:trainer => current_trainer, :state => "Viewed")
+          @pokemon.huntstates.create(:trainer => current_trainer, :viewed => 1, :caught => 0)
         end
       end
     else
@@ -48,16 +48,25 @@ class PokemonsController < ApplicationController
         @pokemon.trainers.delete(current_trainer)
       else
         @hunt = @pokemon.huntstates.where(:trainer => current_trainer)
-        if !@hunt.first.update({ :state => @state})
+        @paramForUpdate = ""
+        if @state == "Caught"
+          @paramForUpdate = { :viewed => 1, :caught => 1}
+        else
+          @paramForUpdate = { :viewed => 1, :caught => 0}
+        end
+        if !@hunt.first.update(@paramForUpdate)
           #Throw Error
           render nothing: true, :status => :forbidden
         end
       end
     end 
+
     #Rendering with some data
-    #@pokemons = current_trainer.pokemons
-    #@hunts = current_trainer.huntstates
-    #render json: { :pkmn => @pokemons, :hunts => @hunts }, status: :ok
+    @pokemons = current_trainer.pokemons
+      @ViewedNb = @pokemons.count
+      @CaughtNb = @pokemons.where('huntstates.caught = 1').count
+
+    render json: { :pkmn => @pokemons, :view => @ViewedNb, :caught => @CaughtNb }, status: :ok
   end
 
 

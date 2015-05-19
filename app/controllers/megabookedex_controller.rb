@@ -4,9 +4,14 @@ class MegabookedexController < ApplicationController
   # GET /megabookedex
   def index
     ####### Pokemon managing ######
-    @pokemons = Pokemon.all.limit(18).order("number asc")
-    @pokemonTrainer = current_trainer.pokemons.select('pokemons.*, huntstates.state').where("number > 0 AND number <= 18")
-    @pokemonMax = Pokemon.all.count
+    @pokemonsAll = Pokemon.all
+      @pokemonMax = @pokemonsAll.count
+      @pokemons = @pokemonsAll.limit(18).order("number asc")
+    
+    @allPokemonTrainer = current_trainer.pokemons
+      @ViewedNb = @allPokemonTrainer.count
+      @CaughtNb = @allPokemonTrainer.where('huntstates.caught = 1').count
+    @pokemonTrainer = @allPokemonTrainer.select('pokemons.*, huntstates.viewed, huntstates.caught').where("number > 0 AND number <= 18")
 
     ####### Badges managing ######
     #Badges by Region

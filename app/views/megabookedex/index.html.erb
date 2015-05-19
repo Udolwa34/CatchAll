@@ -39,13 +39,13 @@
         <td><%= image_tag("pokemon/"+pokemon.smallpicturelink+".png") %></td>
         <td class="huntActionColumn">
           <button class="removeHuntButton" onclick="changeStateOfPokemon(<%= pokemon.number %>, 'None')"
-          style="display:<%= (@pkmn != nil)? '' : 'none' %>"
+          style="display:<%= (@pkmn == nil)? 'none' : '' %>"
           >Remove</button>
           <button class="addViewedHuntButton" onclick="changeStateOfPokemon(<%= pokemon.number %>, 'Viewed')"
-          style="display:<%= (@pkmn == nil || (@pkmn != nil && @pkmn.state == "Caught"))? '' : 'none' %>"
+          style="display:<%= (@pkmn == nil || (@pkmn != nil && @pkmn.caught == 1))? '' : 'none' %>"
           >Viewed</button>
           <button class="addCaughtHuntButton" onclick="changeStateOfPokemon(<%= pokemon.number %>, 'Caught')"
-          style="display:<%= (@pkmn == nil || (@pkmn != nil && @pkmn.state == "Viewed"))? '' : 'none' %>"
+          style="display:<%= (@pkmn == nil || (@pkmn != nil && @pkmn.caught == 0))? '' : 'none' %>"
           >Caught</button>
         </td>
       </tr>
