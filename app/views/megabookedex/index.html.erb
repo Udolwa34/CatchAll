@@ -4,7 +4,54 @@
   <div class="introduction page-header">
     <h1>Megabookedex</h1>
     <h3>The Ultimate Book which gather all your Pokemon and badges.</h3>
+    
   </div>
+</div>
+
+<div class="Test">
+<span id="maxPokemonPage" style="display:none"><%= @pokemonMax/18 %></span>
+<button id="goToPrevPage">Prev</button>
+<button id="goToNextPage">Next</button>
+<div id="resultsPKMN"></div>
+<div id="resultsPKMNTrainer"></div>
+<table>
+  <thead>
+    <tr>
+      <th>Number</th>
+      <th>Name</th>
+      <th>Picturelink</th>
+      <th>Smallpicturelink</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pokemons.each do |pokemon| %>
+      <% if (@pokemonTrainer.include? pokemon) %>
+        <% @pkmn = @pokemonTrainer.find(pokemon.id) %>
+      <% else %>
+        <% @pkmn = nil %>
+      <% end %>
+      <tr id="pkmnRow<%= pokemon.id%>">
+        <td><%= pokemon.number %></td>
+        <td><%= pokemon.name %></td>
+        <td><%= pokemon.picturelink  %></td>
+        <td><%= image_tag("pokemon/"+pokemon.smallpicturelink+".png") %></td>
+        <td class="huntActionColumn">
+          <button class="removeHuntButton" onclick="changeStateOfPokemon(<%= pokemon.number %>, 'None')"
+          style="display:<%= (@pkmn == nil)? 'none' : '' %>"
+          >Remove</button>
+          <button class="addViewedHuntButton" onclick="changeStateOfPokemon(<%= pokemon.number %>, 'Viewed')"
+          style="display:<%= (@pkmn == nil || (@pkmn != nil && @pkmn.caught == 1))? '' : 'none' %>"
+          >Viewed</button>
+          <button class="addCaughtHuntButton" onclick="changeStateOfPokemon(<%= pokemon.number %>, 'Caught')"
+          style="display:<%= (@pkmn == nil || (@pkmn != nil && @pkmn.caught == 0))? '' : 'none' %>"
+          >Caught</button>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 </div>
 
 <div class="container">
@@ -60,10 +107,10 @@
                     <td><%= badge.typebadge %></td>
                     <td class="badgeObtainedColumn"><%= (@badgeInTrainerCollection)? "Yes" : "No" %></td>
                     <td class="badgeActionColumn">
-                        <button class="btn btn-purple removeBadgeButton" onclick="removeBadgeById(<%= badge.id %>)"
+                        <button class="removeBadgeButton" onclick="removeBadgeById(<%= badge.id %>)"
                           style="display:<%= @badgeInTrainerCollection? '' : 'none' %>"
                         >Remove</button>
-                        <button class="btn btn-purple addBadgeButton" onclick="addBadgeById(<%= badge.id %>)"
+                        <button class="addBadgeButton" onclick="addBadgeById(<%= badge.id %>)"
                           style="display:<%= @badgeInTrainerCollection? 'none' : '' %>"
                         >Add</button>
                     </td>

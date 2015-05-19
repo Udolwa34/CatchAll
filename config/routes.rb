@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   root 'pokemons#search'
 
   get 'megabookedex' => 'megabookedex#index'
+  
+  get 'pokemons/getPokemonByPage/:page' => 'pokemons#getPokemonByPage'
+  get 'pokemons/changeStateOfPokemon/:id' => 'pokemons#changeStateOfPokemon'
   get 'badges/removeFromTrainer/:id' => 'badges#removeFromTrainer'
   get 'badges/addToTrainer/:id' => 'badges#addToTrainer'
 
