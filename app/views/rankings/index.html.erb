@@ -127,10 +127,10 @@
               <tr>
                 <td>4137 / <%= @trainerMax %></td>
                 <td><%= trainer.email %></td>
-                <td><%= ((Trainer.find(trainer.id)).pokemons).where('huntstates.caught = 1').count %> / <%= @pokemonMax %></td>
-                <td><%= ((Trainer.find(trainer.id)).pokemons).count %> / <%= @pokemonMax %></td>
-                <td><%= ((Trainer.find(trainer.id)).badges).count %> / <%= @badgeMax %></td>
-                <td><%= ((Trainer.find(trainer.id)).pokemons).where('huntstates.caught = 1').count * ((Trainer.find(trainer.id)).pokemons).count * (((Trainer.find(trainer.id)).badges).count + 1) %></td>
+                <td><%= trainer.pokemons.where('huntstates.caught = 1').count %> / <%= @pokemonMax %></td>
+                <td><%= trainer.pokemons.count %> / <%= @pokemonMax %></td>
+                <td><%= trainer.badges.count %> / <%= @badgeMax %></td>
+                <td><%= trainer.pokemons.where('huntstates.caught = 1').count * trainer.pokemons.count * (trainer.badges.count + 1) %></td>
               </tr>
             <% end %>
           </tbody>
