@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
+
   get 'contact_us' => 'contacts#new'
+  get 'ranking' => 'rankings#index'
 
   #get 'contact_us/validation' => 'contacts#create'
 

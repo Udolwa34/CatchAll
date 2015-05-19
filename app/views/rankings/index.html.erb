@@ -1,0 +1,139 @@
+    <div class="container">
+
+		  <div class="introduction page-header">
+        <h1>Ranking</h1>
+        <h3>Who is the best trainer ?!</h3> 
+      </div>
+      
+
+      <div class="row">
+        <div class="col-sm-12 col-md-4">
+          <div class="thumbnail">
+            <img src="img/udolwa.jpg" alt="...">
+            <div class="caption">
+              <h1>#1</h1>
+              <hr>
+              <p>
+                Pseudo: <b>Udolwa</b> <br>
+                Pokemon caught: <b>604</b> <br>
+                Pokemon seen: <b>698</b>
+              </p>
+              <hr>
+              <p><a href="#" class="btn btn-purple btn-block" role="button">More</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-4">
+          <div class="thumbnail">
+            <img src="img/lamaline.jpg" alt="...">
+            <div class="caption">
+              <h1>#2</h1>
+              <hr>
+              <p>
+                Pseudo: <b>LaMalineCroustillante</b> <br>
+                Pokemon caught: <b>291</b> <br>
+                Pokemon seen: <b>473</b>
+              </p>
+              <hr>
+              <p><a href="#" class="btn btn-purple btn-block" role="button">More</a> </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-4">
+            <div class="thumbnail">
+            <img src="img/popot.jpg" alt="...">
+            <div class="caption">
+              <h1>#3</h1>
+              <hr>
+              <p>
+                Pseudo : <b>Popot</b> <br>
+                Pokemon caught: <b>373</b> <br>
+                Pokemon seen : <b>451</b>
+              </p>
+              <hr>
+              <p><a href="#" class="btn btn-purple btn-block" role="button">More</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+       <div class="panel-heading">Your position in this ranking</div>
+
+        <!-- Table -->
+        <table class="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Pseudo</th>
+              <th>Pokemon caught</th>
+              <th>Pokemon seen</th>
+              <th>Badges obtained</th>
+              <th>Points</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>4137 / <%= @trainerMax %></td>
+              <td><%= @trainerPseudo %></td>
+              <td><%= @trainerPokemonCaughtCount %> / <%= @pokemonMax %></td>
+              <td><%= @trainerPokemonSeenCount %> / <%= @pokemonMax %></td>
+              <td><%= @trainerBadgesCount %> / <%= @badgeMax %></td>
+              <td><%= @trainerPokemonCaughtCount * @trainerPokemonSeenCount * (@trainerBadgesCount + 1) %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <nav style="margin-bottom:-10px">
+        <ul class="pagination">
+          <li>
+            <a href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li><a href="#">1</a></li>
+          <li><a href="#">2</a></li>
+          <li><a href="#">3</a></li>
+          <li><a>...</a></li>
+          <li><a href="#">299</a></li>
+          <li><a href="#">300</a></li>
+          <li>
+            <a href="#" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="panel panel-default">
+       <div class="panel-heading">Ranking</div>
+
+        <!-- Table -->
+        <table class="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Pseudo</th>
+              <th>Pokemon caught</th>
+              <th>Pokemon seen</th>
+              <th>Badges obtained</th>
+              <th>Points</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @trainers.each do |trainer| %>
+
+              <tr>
+                <td>4137 / <%= @trainerMax %></td>
+                <td><%= trainer.email %></td>
+                <td><%= ((Trainer.find(trainer.id)).pokemons).where('huntstates.caught = 1').count %> / <%= @pokemonMax %></td>
+                <td><%= ((Trainer.find(trainer.id)).pokemons).count %> / <%= @pokemonMax %></td>
+                <td><%= ((Trainer.find(trainer.id)).badges).count %> / <%= @badgeMax %></td>
+                <td><%= ((Trainer.find(trainer.id)).pokemons).where('huntstates.caught = 1').count * ((Trainer.find(trainer.id)).pokemons).count * (((Trainer.find(trainer.id)).badges).count + 1) %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
