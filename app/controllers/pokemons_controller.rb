@@ -10,8 +10,8 @@ class PokemonsController < ApplicationController
       render nothing: true, :status => :forbidden
     else 
       #Rendering with some data 
-      @pokemons = Pokemon.all.limit(18).offset(18*(@page.to_i-1)).order("number asc")
-      @pokemonTrainer = current_trainer.pokemons.select('pokemons.*, huntstates.viewed, huntstates.caught').where(number: (18*(@page.to_i-1))..(18*@page.to_i))
+      @pokemons = Pokemon.all.limit(12).offset(12*(@page.to_i-1)).order("number asc")
+      @pokemonTrainer = current_trainer.pokemons.select('pokemons.*, huntstates.viewed, huntstates.caught').where(number: (12*(@page.to_i-1))..(12*@page.to_i))
 
       render json: { 
         :pokemons => @pokemons, 
