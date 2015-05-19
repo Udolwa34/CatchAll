@@ -172,6 +172,10 @@ function changeStateOfPokemon(numPkmn, state){
        success: function (data) {
 
        	changeColorStatePokemon(state);
+        console.log(data);
+        $("#pkmnCaught").text(data.caught)
+        $("#pkmnSeen").text(data.view)
+        $("#trainerPoints").text(data.caught * data.view * (parseInt($("#badgeObtain").text()) + 1))
 
        },
        error : function (){

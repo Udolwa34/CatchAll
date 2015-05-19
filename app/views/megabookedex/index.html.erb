@@ -19,11 +19,11 @@
         </thead>
         <tbody>
           <tr>
-            <td><%= @CaughtNb %> / <%= @pokemonMax %></td>
-            <td><%= @ViewedNb %> / <%= @pokemonMax %></td>
-            <td><%= @trainerBadges.count %> / <%= @badgesTotal %></td>
-            <td><%= (@trainerBadges.count + 1) * @CaughtNb * @ViewedNb %></td>
-            <td>4137</td>
+            <td><span id="pkmnCaught"><%= @CaughtNb %></span> / <%= @pokemonMax %></td>
+            <td><span id="pkmnSeen"><%= @ViewedNb %></span> / <%= @pokemonMax %></td>
+            <td><span id="badgeObtained"><%= @trainerBadges.count %></span> / <%= @badgesTotal %></td>
+            <td id="trainerPoints"><%= (@trainerBadges.count + 1) * @CaughtNb * @ViewedNb %></td>
+            <td><span>4137</span></td>
           </tr>
         </tbody>
       </table>
