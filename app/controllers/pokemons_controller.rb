@@ -11,7 +11,7 @@ class PokemonsController < ApplicationController
     else 
       #Rendering with some data 
       @pokemons = Pokemon.all.limit(12).offset(12*(@page.to_i-1)).order("number asc")
-      @pokemonTrainer = current_trainer.pokemons.select('pokemons.*, huntstates.viewed, huntstates.caught').where(number: (12*(@page.to_i-1))..(12*@page.to_i))
+      @pokemonTrainer = current_trainer.pokemons.select('pokemons.*, huntstates.viewed, huntstates.caught').where(number: (12*(@page.to_i-1)+1)..(12*@page.to_i))
 
       render json: { 
         :pokemons => @pokemons, 

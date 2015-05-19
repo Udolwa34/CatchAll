@@ -86,7 +86,6 @@ function searchPkmn(numPokemon){
 		   
 		   success: function(data) {
 		   		numeroPokemon = parseInt(numPokemon);
-		   		console.log(data)
 		   		$("#pokemonImage").attr("src", "/assets/pokemon/"+data.national_id+".png");
 		   		$("#pokemonName h1").text(data.name);
 		   		$("#tdName").text(data.name);

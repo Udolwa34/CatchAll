@@ -1,0 +1,24 @@
+<script id="pokemonTemplate" type="text/html">
+	<div id="pkmnRow{{number}}" class="col-xs-12 col-md-3 col-sm-6">
+	  <div class="thumbnail">
+	    <h4>#{{number}} - {{name}}</h4>
+	    <hr>
+	    <div class="pokemonImg">
+	      <img src="/assets/pokemon/{{smallpicturelink}}.png" />
+	    </div>
+	    <div class="caption huntActionColumn">
+	      <div class="btn-group" style="width:100%">
+	        <button type="button" class="btnState btn btn-block dropdown-toggle" 
+	          data-toggle="dropdown" aria-expanded="false">
+	          {{state}} <span class="caret"></span>
+	        </button>
+	        <ul class="dropdown-menu" role="menu">
+	          <li class="removeHuntButton" onclick="changeStateOfPokemon({{number}}, 'None')" style="display:'none'"><a>None</a></li>
+	          <li class="addSeenHuntButton" onclick="changeStateOfPokemon({{number}}, 'Seen')" style="display:'none'"><a>Seen</a></li>
+	          <li class="addCaughtHuntButton" onclick="changeStateOfPokemon({{number}}, 'Caught')" style="display:'none'"><a>Caught</a></li>
+	        </ul>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</script>

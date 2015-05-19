@@ -11,6 +11,8 @@ $(document).ready(function(){
       $("#pkmnSeen").text()
     )
 
+    //Definition of Mustache's template
+    $.Mustache.load('./assets/templates.htm');
 
     ////////////////////////////Navigation buttons///////////////////////////////
     //Going on previous page
@@ -169,67 +171,20 @@ function getPokemonByPage(numberPage){
      type: 'GET',
      dataType: 'json',
      success: function (data) {
-        var plop = "";
+      //Get pkmnList <div>
+      pkmnList = $("#pkmnList");
+
+      //Removing actual shown Pokemon
+      pkmnList.html("");
+
         for ( var i = 0; i < data["pokemons"].length; i++){
-          plop += data["pokemons"][i].name;
+          data["pokemons"][i]["state"] = returnHuntstateofPokemon(
+            data["pokemons"][i]["number"], data["pokemonTrainer"]
+          );
+
+          pkmnList.mustache('pokemonTemplate', data["pokemons"][i], { method: 'append' });
+          changeColorStatePokemon(data["pokemons"][i]["number"], data["pokemons"][i]["state"]);
         }
-        $("#resultsPKMN").text(plop);
-
-        plop = "";
-        pkmnList = $("#pkmnList");
-
-        for ( var i = 0; i < data["pokemonTrainer"].length; i++){
-
-          plop += data["pokemonTrainer"][i].name + data["pokemonTrainer"][i].state;
-          /*pkmnList.append(
-                <% if (@pokemonTrainer.include? pokemon) %>
-                  <% @pkmn = @pokemonTrainer.find(pokemon.id) %>
-                <% else %>
-                  <% @pkmn = nil %>
-                <% end %> +
-                '<div id="'+pkmnRow<%= pokemon.id%>+'" class="col-xs-12 col-md-3 col-sm-6">
-                  <div class="thumbnail">
-                    <h4>#'+<%= pokemon.number %> + ' - ' + <%= pokemon.name %>+'</h4>
-                    <hr>
-                    <div class="pokemonImg">'
-                      + <%= image_tag("pokemon/"+pokemon.smallpicturelink+".png") %>
-                    + '</div>
-                    <div class="caption huntActionColumn">
-                      <div class="btn-group" style="width:100%">
-                        <button type="button" class="btnState btn btn-block dropdown-toggle
-                        ' + <%= (@pkmn == nil)? 'btn-danger' : '' %>
-                        <%= (@pkmn != nil && @pkmn.caught == 0)? 'btn-warning' : '' %>
-                        <%= (@pkmn != nil && @pkmn.caught == 1)? 'btn-info' : '' %> + '" data-toggle="dropdown" aria-expanded="false">
-                        ' + <%= (@pkmn == nil)? 'None' : '' %>
-                        <%= (@pkmn != nil && @pkmn.caught == 0)? 'Seen' : '' %>
-                        <%= (@pkmn != nil && @pkmn.caught == 1)? 'Caught' : '' %> + '<span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu">
-                          <li class="removeHuntButton" onclick="changeStateOfPokemon(' + <%= pokemon.number %> + ', 'None')" style="display:' + <%= (@pkmn == nil)? 'none' : '' %> + '"><a>None</a></li>
-                          <li class="addSeenHuntButton" onclick="changeStateOfPokemon(' + <%= pokemon.number %> + ', 'Seen')" style="display:' + <%= (@pkmn == nil || (@pkmn != nil && @pkmn.caught == 1))? '' : 'none' %> + '"><a>Seen</a></li>
-                          <li class="addCaughtHuntButton" onclick="changeStateOfPokemon(' + <%= pokemon.number %> + ', 'Caught')" style="display: ' + <%= (@pkmn == nil || (@pkmn != nil && @pkmn.caught == 0))? '' : 'none' %> + '"><a>Caught</a></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  
-                </div>'
-          );*/
-          
-
-        }
-        $("#resultsPKMNTrainer").text(plop);
-
-      /*
-       //Managing display of row's buttons and informations
-       badgeRow = $("#badgeRow"+idBadge);
-       badgeRow.find(".badgeObtainedColumn").text("No");
-       badgeRow.find(".removeBadgeButton").hide();
-       badgeRow.find(".addBadgeButton").show();
-
-       //Managing progression-bar 
-       updateBadgeProgressBar(data["total"], data["trainerNbr"]);
-      */
      },
      error : function (){
       alert('An error occured during the operation. Please, try again later.');
@@ -237,4 +192,16 @@ function getPokemonByPage(numberPage){
  });
 }
 
+//Return hunt's state of a Pokemon 
+function returnHuntstateofPokemon(numPokemon, listePkmnTrainer){
+  state = "None";
+  PkmnList = jQuery.grep(listePkmnTrainer, function(n) {
+    return ( n["number"] == numPokemon);
+  });
+
+  if ( PkmnList.length > 0 ){
+    state = ( PkmnList[0]["caught"] == "1")? "Caught" : "Seen";
+  } 
+  return state;
+}
 
