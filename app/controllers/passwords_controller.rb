@@ -1,4 +1,4 @@
-class Trainers::PasswordsController < Devise::PasswordsController
+class PasswordsController < Devise::PasswordsController
   # GET /resource/password/new
   # def new
   #   super
@@ -29,4 +29,17 @@ class Trainers::PasswordsController < Devise::PasswordsController
   # def after_sending_reset_password_instructions_path_for(resource_name)
   #   super(resource_name)
   # end
+
+   def create
+    self.resource = resource_class.send_reset_password_instructions(resource_params)
+    yield resource if block_given?
+
+    if successfully_sent?(resource)
+      respond_with({}, location: after_sending_reset_password_instructions_path_for(resource_name))
+    else
+      set_flash_message :alert, :"invalid"
+      redirect_to new_trainer_registration_path
+    end
+  end
+
 end

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :trainers, :path => '', :path_names => {:sign_in => 'login', :sign_up => 'login'}
+  devise_for :trainers, :path => '', :path_names => {:sign_in => 'login', :sign_up => 'login'}, :controllers => {:registrations => 'registrations', :passwords => 'passwords'}
   resources :pokemons
   resources :badges
 
