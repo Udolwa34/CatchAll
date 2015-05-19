@@ -20,6 +20,26 @@
 <button id="goToNextPage">Next</button>
 <button id="goToLastPage">Last</button>
 
+  <div class="panel-body">  
+    <label for="">Progress:</label>
+    <div class="progress">
+      <% @prctCompletionCaught = (((@CaughtNb) * 100)/ @pokemonMax) %>
+      <% @prctCompletionViewed = ((@ViewedNb * 100)/ @pokemonMax) %>
+      <div id="pkmnProgressBarCaught" class="progress-bar progress-bar-success" 
+        style="width: <%= @prctCompletionCaught %>%">
+        <span id="totalPrctCaught"
+          style="display:<%= (@prctCompletionCaught > 7)? '' : 'none'  %>"
+          >Caught</span>
+      </div>
+      <div id="pkmnProgressBarViewed" class="progress-bar progress-bar-danger" 
+        style="width: <%= @prctCompletionViewed %>%">
+        <span id="totalPrctViewed"
+          style="display:<%= (@prctCompletionViewed > 7)? '' : 'none'  %>"
+         >Seen</span>
+    </div>
+  </div>
+
+
 
 <div id="resultsPKMN"></div>
 <div id="resultsPKMNTrainer"></div>
