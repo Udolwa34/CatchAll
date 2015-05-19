@@ -1,48 +1,50 @@
 $(document).ready(function(){
-	//Definition of page number
-	page = 1;
-	pageMax = 60;
-  maxPokemon = parseInt($("#hid_maxPokemon").text());
-    $("#hid_maxPokemon").remove();  
-  navigationButtonsUpdate();
-  updatePokemonProgressBarAndRankingData(
-    $("#pkmnCaught").text(),
-    $("#pkmnSeen").text()
-  )
+  if ( $("#MegabookedexTitle").length != 0 ){
+    //Definition of page number
+    page = 1;
+    pageMax = 60;
+    maxPokemon = parseInt($("#hid_maxPokemon").text());
+      $("#hid_maxPokemon").remove();  
+    navigationButtonsUpdate();
+    updatePokemonProgressBarAndRankingData(
+      $("#pkmnCaught").text(),
+      $("#pkmnSeen").text()
+    )
 
 
-  ////////////////////////////Navigation buttons///////////////////////////////
-  //Going on previous page
-  $("#goToFirstPage").click(function(){
-    if (page > 1){
-      page = 1; getPokemonByPage(page);
-      navigationButtonsUpdate();
-    }
-  });
+    ////////////////////////////Navigation buttons///////////////////////////////
+    //Going on previous page
+    $("#goToFirstPage").click(function(){
+      if (page > 1){
+        page = 1; getPokemonByPage(page);
+        navigationButtonsUpdate();
+      }
+    });
 
-  //Going on previous page
-	$("#goToPrevPage").click(function(){
-		if (page > 1){
-			page--; getPokemonByPage(page);
-      navigationButtonsUpdate();
-		}
-	});
+    //Going on previous page
+    $("#goToPrevPage").click(function(){
+      if (page > 1){
+        page--; getPokemonByPage(page);
+        navigationButtonsUpdate();
+      }
+    });
 
-  //Going on next page
-	$("#goToNextPage").click(function(){
-		if (page < pageMax){
-			page++; getPokemonByPage(page);
-      navigationButtonsUpdate();
-		}
-	});
+    //Going on next page
+    $("#goToNextPage").click(function(){
+      if (page < pageMax){
+        page++; getPokemonByPage(page);
+        navigationButtonsUpdate();
+      }
+    });
 
-  //Going on previous page
-  $("#goToLastPage").click(function(){
-    if (page < pageMax){
-      page = pageMax; getPokemonByPage(page);
-      navigationButtonsUpdate();
-    }
-  });
+    //Going on previous page
+    $("#goToLastPage").click(function(){
+      if (page < pageMax){
+        page = pageMax; getPokemonByPage(page);
+        navigationButtonsUpdate();
+      }
+    });
+  }
 });
 
 //Going on page n°X
