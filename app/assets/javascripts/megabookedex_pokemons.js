@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	//Definition of page number
-	var page = 1;
-	var pageMax = 60;
+	page = 1;
+	pageMax = 60;
   navigationButtonsUpdate();
 
 
@@ -70,14 +70,20 @@ function navigationButtonsUpdate(){
   //Remove buttons
   $("#navButtons").html("");
 
+
+
+  /*$("#navButtons").prepend("<li id='goToPreviousPage'><a>Previous</a></li>");
+  $("#navButtons").prepend("<li id='goToFirstPage'><a>First</a></li>");*/
   //Add buttons
   for (var i = page-1; i > (page - 3) && i > 0; i--){
-    $("#navButtons").prepend("<button class='goToPage' onclick='goToPage("+i+")'>"+i+"</button>");
+    $("#navButtons").prepend("<li class='goToPage' onclick='goToPage("+i+")'><a>"+i+"</a></li>");
   }
-  $("#navButtons").append("<button class='goToPage activeNavButton'>"+ page +"</button>");
+  $("#navButtons").append("<li class='goToPage activeNavButton'><a>"+ page +"</a></li>");
   for (var i = page+1; i < (page + 3) && i <= pageMax; i++){
-    $("#navButtons").append("<button class='goToPage' onclick='goToPage("+i+")'>"+i+"</button>");
+    $("#navButtons").append("<li class='goToPage' onclick='goToPage("+i+")'><a>"+i+"</a></li>");
   }
+  /*$("#navButtons").append("<li id='goToNextPage'><a>Next</a></li>");
+  $("#navButtons").append("<li id='goToLastPage'><a>Last</a></li>");*/
 }
 
 
@@ -95,9 +101,48 @@ function getPokemonByPage(numberPage){
        		$("#resultsPKMN").text(plop);
 
        		plop = "";
+          pkmnList = $("#pkmnList");
+
        		for ( var i = 0; i < data["pokemonTrainer"].length; i++){
+
        			plop += data["pokemonTrainer"][i].name + data["pokemonTrainer"][i].state;
-       		}
+            pkmnList.append(
+                  /*<% if (@pokemonTrainer.include? pokemon) %>
+                    <% @pkmn = @pokemonTrainer.find(pokemon.id) %>
+                  <% else %>
+                    <% @pkmn = nil %>
+                  <% end %> +
+                  '<div id="'+pkmnRow<%= pokemon.id%>+'" class="col-xs-12 col-md-3 col-sm-6">
+                    <div class="thumbnail">
+                      <h4>#'+<%= pokemon.number %> + ' - ' + <%= pokemon.name %>+'</h4>
+                      <hr>
+                      <div class="pokemonImg">'
+                        + <%= image_tag("pokemon/"+pokemon.smallpicturelink+".png") %>
+                      + '</div>
+                      <div class="caption huntActionColumn">
+                        <div class="btn-group" style="width:100%">
+                          <button type="button" class="btnState btn btn-block dropdown-toggle
+                          ' + <%= (@pkmn == nil)? 'btn-danger' : '' %>
+                          <%= (@pkmn != nil && @pkmn.caught == 0)? 'btn-warning' : '' %>
+                          <%= (@pkmn != nil && @pkmn.caught == 1)? 'btn-info' : '' %> + '" data-toggle="dropdown" aria-expanded="false">
+                          ' + <%= (@pkmn == nil)? 'None' : '' %>
+                          <%= (@pkmn != nil && @pkmn.caught == 0)? 'Seen' : '' %>
+                          <%= (@pkmn != nil && @pkmn.caught == 1)? 'Caught' : '' %> + '<span class="caret"></span>
+                          </button>
+                          <ul class="dropdown-menu" role="menu">
+                            <li class="removeHuntButton" onclick="changeStateOfPokemon(' + <%= pokemon.number %> + ', 'None')" style="display:' + <%= (@pkmn == nil)? 'none' : '' %> + '"><a>None</a></li>
+                            <li class="addViewedHuntButton" onclick="changeStateOfPokemon(' + <%= pokemon.number %> + ', 'Viewed')" style="display:' + <%= (@pkmn == nil || (@pkmn != nil && @pkmn.caught == 1))? '' : 'none' %> + '"><a>Seen</a></li>
+                            <li class="addCaughtHuntButton" onclick="changeStateOfPokemon(' + <%= pokemon.number %> + ', 'Caught')" style="display: ' + <%= (@pkmn == nil || (@pkmn != nil && @pkmn.caught == 0))? '' : 'none' %> + '"><a>Caught</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    
+                  </div>'*/
+            );
+       		  
+
+          }
        		$("#resultsPKMNTrainer").text(plop);
 
        	/*
@@ -126,12 +171,22 @@ function changeStateOfPokemon(numPkmn, state){
        dataType: 'json',
        success: function (data) {
 
+       	changeColorStatePokemon(state);
+
+       },
+       error : function (){
+       	alert('An error occured during the operation. Please, try again later.');
+       }
+   });
+
+  function changeColorStatePokemon(state){
+
         pokemonRow = $("#pkmnRow"+numPkmn);
         pokemonBtnState = pokemonRow.find(".btnState");
 
-       	if ( state == "None"){
-       		//Cacher/Disabled boutons "Remove", afficher boutons "Viewed/Caught"
-       		//Faire modifications nécessaires pour faire passer le design à "None"
+        if ( state == "None"){
+          //Cacher/Disabled boutons "Remove", afficher boutons "Viewed/Caught"
+          //Faire modifications nécessaires pour faire passer le design à "None"
           pokemonBtnState.text("None ").append("<span class='caret'></span>");
           pokemonBtnState.removeClass("btn-info");
           pokemonBtnState.removeClass("btn-warning");
@@ -140,9 +195,9 @@ function changeStateOfPokemon(numPkmn, state){
           pokemonRow.find(".addViewedHuntButton").show();
           pokemonRow.find(".addCaughtHuntButton").show();
 
-       	} else if ( state == "Viewed" ) {
-        	//Cacher/Disabled boutons "Viewed", afficher boutons "Remove/Caught"
-        	//Faire modifications nécessaires pour faire passer le design à "Viewed"
+        } else if ( state == "Viewed" ) {
+          //Cacher/Disabled boutons "Viewed", afficher boutons "Remove/Caught"
+          //Faire modifications nécessaires pour faire passer le design à "Viewed"
           pokemonBtnState.text("Viewed ").append("<span class='caret'></span>");
           pokemonBtnState.removeClass("btn-danger");
           pokemonBtnState.removeClass("btn-info");
@@ -152,8 +207,8 @@ function changeStateOfPokemon(numPkmn, state){
           pokemonRow.find(".addCaughtHuntButton").show();
 
         } else {
-        	//Cacher/Disabled boutons "Caught", afficher boutons "Remove/Viewed"
-        	//Faire modifications nécessaires pour faire passer le design à "Caught"
+          //Cacher/Disabled boutons "Caught", afficher boutons "Remove/Viewed"
+          //Faire modifications nécessaires pour faire passer le design à "Caught"
           pokemonBtnState.text("Caught ").append("<span class='caret'></span>");
           pokemonBtnState.removeClass("btn-danger");
           pokemonBtnState.removeClass("btn-warning");
@@ -162,10 +217,5 @@ function changeStateOfPokemon(numPkmn, state){
           pokemonRow.find(".addViewedHuntButton").show();
           pokemonRow.find(".addCaughtHuntButton").hide();
         }
-
-       },
-       error : function (){
-       	alert('An error occured during the operation. Please, try again later.');
-       }
-   });
+  }
 }

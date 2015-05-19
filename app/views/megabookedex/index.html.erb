@@ -32,32 +32,38 @@
 
   <div class="panel panel-default">
         <div class="panel-heading">Pokemons</div>
-          <div class="panel-body">
-        
+            <div class="panel-body">  
               <label for="">Progress:</label>
               <div class="progress">
-                <div class="progress-bar progress-bar-success" style="width: 35%">
-                  <span class="sr-only">35% Complete (success)</span>Caught
+                <% @prctCompletionCaught = (((@CaughtNb) * 100)/ @pokemonMax) %>
+                <% @prctCompletionViewed = ((@ViewedNb * 100)/ @pokemonMax) %>
+                <div id="pkmnProgressBarCaught" class="progress-bar progress-bar-success" 
+                  style="width: <%= @prctCompletionCaught %>%">
+                  <span id="totalPrctCaught"
+                    style="display:<%= (@prctCompletionCaught > 7)? '' : 'none'  %>"
+                    >Caught</span>
                 </div>
-                <div class="progress-bar progress-bar-danger" style="width: 10%">
-                  <span class="sr-only">10% Complete (danger)</span>Seen
+                <div id="pkmnProgressBarViewed" class="progress-bar progress-bar-danger" 
+                  style="width: <%= @prctCompletionViewed %>%">
+                  <span id="totalPrctViewed"
+                    style="display:<%= (@prctCompletionViewed > 7)? '' : 'none'  %>"
+                   >Seen</span>
               </div>
             </div>
             
             <nav style="margin-bottom:-10px">
               <ul class="pagination">
-                <li id="goToFirstPage" disableds>
+                <li id="goToFirstPage">
                   <a aria-label="First">First</a>
                 </li>
-                <li id="goToPrevPage" disabled>
+                <li id="goToPrevPage">
                   <a aria-label="Previous">Previous</a>
                 </li>
-                <li><a>1</a></li>
-                <li><a>2</a></li>
-                <li><a>3</a></li>
-                <li><a>...</a></li>
-                <li><a>32</a></li>
-                <li><a>33</a></li>
+              </ul>
+              <ul class="pagination" id="navButtons">
+                  
+              </ul>
+              <ul class="pagination">
                 <li id="goToNextPage">
                   <a aria-label="Next">Next</a>
                 </li>
@@ -69,31 +75,6 @@
 
             <div class="Test">
 
-              <div id="navButtons">
-                <button class="goToPage">5</button>
-                <button class="goToPage">12</button>
-                <button class="goToPage">35</button>
-              </div>
-
-  <div class="panel-body">  
-    <label for="">Progress:</label>
-    <div class="progress">
-      <% @prctCompletionCaught = (((@CaughtNb) * 100)/ @pokemonMax) %>
-      <% @prctCompletionViewed = ((@ViewedNb * 100)/ @pokemonMax) %>
-      <div id="pkmnProgressBarCaught" class="progress-bar progress-bar-success" 
-        style="width: <%= @prctCompletionCaught %>%">
-        <span id="totalPrctCaught"
-          style="display:<%= (@prctCompletionCaught > 7)? '' : 'none'  %>"
-          >Caught</span>
-      </div>
-      <div id="pkmnProgressBarViewed" class="progress-bar progress-bar-danger" 
-        style="width: <%= @prctCompletionViewed %>%">
-        <span id="totalPrctViewed"
-          style="display:<%= (@prctCompletionViewed > 7)? '' : 'none'  %>"
-         >Seen</span>
-    </div>
-  </div>
-
 
 
               <div id="resultsPKMN"></div>
@@ -101,7 +82,7 @@
             </div>
 
             <div>
-              <div class="row">
+              <div class="row" id="pkmnList">
                 <% @pokemons.each do |pokemon| %>
                   <% if (@pokemonTrainer.include? pokemon) %>
                     <% @pkmn = @pokemonTrainer.find(pokemon.id) %>
@@ -138,29 +119,6 @@
                 <% end %>
               </div>
             </div>
-
-            <nav style="margin-top:-25px">
-              <ul class="pagination">
-                <li>
-                  <a href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                  </a>
-                </li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a>...</a></li>
-                <li><a href="#">32</a></li>
-                <li><a href="#">33</a></li>
-                <li>
-                  <a href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-
-
         </div>
       </div>
 </div>
