@@ -3,12 +3,15 @@ Rails.application.routes.draw do
   get 'contact_us' => 'contacts#new'
   get 'ranking' => 'rankings#index'
 
+  get 'account' => 'trainers#show'
+
   #get 'contact_us/validation' => 'contacts#create'
 
   devise_for :trainers, :path => '', :path_names => {:sign_in => 'login', :sign_up => 'login'}, :controllers => {:registrations => 'registrations', :passwords => 'passwords'}
   resources :pokemons
   resources :badges
   resources :contacts, only: [:new, :create]
+  resources :trainers
 
   root 'pokemons#search'
 

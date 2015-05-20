@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150518120834) do
+ActiveRecord::Schema.define(version: 20150520203345) do
 
   create_table "badges", force: :cascade do |t|
     t.integer  "number"
@@ -61,10 +61,12 @@ ActiveRecord::Schema.define(version: 20150518120834) do
     t.string   "unconfirmed_email"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "login",                  default: "", null: false
   end
 
   add_index "trainers", ["confirmation_token"], name: "index_trainers_on_confirmation_token", unique: true
   add_index "trainers", ["email"], name: "index_trainers_on_email", unique: true
+  add_index "trainers", ["login"], name: "index_trainers_on_login", unique: true
   add_index "trainers", ["reset_password_token"], name: "index_trainers_on_reset_password_token", unique: true
 
   create_table "trainers_badges", id: false, force: :cascade do |t|
