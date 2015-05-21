@@ -10,6 +10,4 @@ class TrainersController < ApplicationController
     end
   end
 
-  def edit
-  end
 end
