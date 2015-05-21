@@ -19,12 +19,14 @@ Rails.application.routes.draw do
   
   get 'pokemons/getPokemonByPage/:page' => 'pokemons#getPokemonByPage'
   get 'pokemons/changeStateOfPokemon/:id' => 'pokemons#changeStateOfPokemon'
-  get 'badges/removeFromTrainer/:id' => 'badges#removeFromTrainer'
-  get 'badges/addToTrainer/:id' => 'badges#addToTrainer'
-
   get 'search' => 'pokemons#search'
   get 'api/search' => 'pokemons#apisearch'
 
+  get 'badges/removeFromTrainer/:id' => 'badges#removeFromTrainer'
+  get 'badges/addToTrainer/:id' => 'badges#addToTrainer'
+
+  #Dev root
+  get 'rank/recalculate' => 'ranks#defineRanks'
   get 'dev/deltrainers' => 'megabookedex#deltrainers'
   
 

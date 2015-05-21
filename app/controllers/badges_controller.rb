@@ -1,10 +1,7 @@
 class BadgesController < ApplicationController
   before_action :set_badge, only: [:show, :edit, :update, :destroy, :removeFromTrainer, :addToTrainer]
-  #before_action :authenticate_trainer!
+  before_action :authenticate_trainer!
 
-
-
-  #TODO ! Limiter l'accès en JSON seulement
   #Removing a badge from a trainer's collection
   def removeFromTrainer
     if !@badge.trainers.exists?(current_trainer) 
@@ -22,7 +19,6 @@ class BadgesController < ApplicationController
   end
 
   #Adding a badge to a trainer's collection
-  #TODO ! Limiter l'accès en JSON seulement
   def addToTrainer
     if @badge.trainers.exists?(current_trainer) 
       #Throw Error

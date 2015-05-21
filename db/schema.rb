@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150520203345) do
+ActiveRecord::Schema.define(version: 20150521183251) do
 
   create_table "badges", force: :cascade do |t|
     t.integer  "number"
@@ -43,6 +43,16 @@ ActiveRecord::Schema.define(version: 20150520203345) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
   end
+
+  create_table "ranks", force: :cascade do |t|
+    t.integer "trainer_id"
+    t.integer "pokemon_viewed"
+    t.integer "pokemon_caught"
+    t.integer "badges_count"
+    t.integer "total_points"
+  end
+
+  add_index "ranks", ["trainer_id"], name: "index_ranks_on_trainer_id"
 
   create_table "trainers", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

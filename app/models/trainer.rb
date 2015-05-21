@@ -11,6 +11,8 @@ class Trainer < ActiveRecord::Base
   has_many :huntstates
   has_many :pokemons, through: :huntstates
 
+  has_one :rank
+
   #Validation
   validates_uniqueness_of :login
 end
