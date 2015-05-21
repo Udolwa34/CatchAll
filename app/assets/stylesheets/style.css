@@ -345,11 +345,18 @@ footer > .container > p > a{
 	width: 49%;
 }
 
+li[disabled=disabled] a {
+	color: #A9A9A9 !important;
+	cursor: not-allowed;
+}
 
+li[disabled=disabled] a:hover {
+	background-color: initial !important;
+}
 
-
-
-
-
-
+li.activeNavButton a {
+	font-weight: bold;
+	color: #fff !important;
+	background-color: #563d7c;
+}
 
