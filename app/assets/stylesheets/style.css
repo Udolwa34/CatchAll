@@ -371,5 +371,15 @@ nav select option{
 	padding: 5px;
 }
 
+/* Ranking */
 
+.medals{
+	max-width: 300px !important;
+	max-height: 300px !important;
+}
+
+.thumbnail h3{
+	text-align: center;
+	margin-top: -10px;
+}
 
