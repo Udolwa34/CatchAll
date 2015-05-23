@@ -54,6 +54,11 @@
             <li id="goToNextPage"><a aria-label="Next">Next</a></li>
             <li id="goToLastPage"><a aria-label="Last">Last</a></li>
           </ul>
+          <select class="form-control" id="pkmnPageSelect">
+              <% for i in 1..((@pokemonMax/12).to_i + 1) %>
+                <option value="<%= i %>" onclick="goToPage(<%= i %>)">Page <%= i %></option>
+              <% end %>
+          </select>
         </nav>
 
         <div class="Test">
