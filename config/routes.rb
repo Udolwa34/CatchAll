@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   get 'contact_us' => 'contacts#new'
-  get 'ranking' => 'rankings#index'
+  get 'ranking' => 'ranks#index'
 
   get 'account' => 'trainers#show'
 
