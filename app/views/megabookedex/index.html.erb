@@ -56,7 +56,10 @@
           </ul>
           <select class="form-control" id="pkmnPageSelect">
               <% for i in 1..((@pokemonMax/12).to_i + 1) %>
-                <option value="<%= i %>" onclick="goToPage(<%= i %>)">Page <%= i %></option>
+                <option value="<%= i %>" onclick="goToPage(<%= i %>)">
+                  Page <%= i %> - #<%= ((12 * (i.to_i - 1)) + 1) %> 
+                  to #<%= ((12 * (i.to_i)) > @pokemonMax)? @pokemonMax : (12 * (i.to_i)) %>
+                </option>
               <% end %>
           </select>
         </nav>
