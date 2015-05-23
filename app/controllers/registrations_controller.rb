@@ -2,6 +2,42 @@ class RegistrationsController < Devise::RegistrationsController
 # before_filter :configure_sign_up_params, only: [:create]
 # before_filter :configure_account_update_params, only: [:update]
 
+  def create
+    # modify logic to redirect to root url
+    build_resource(sign_up_params)
+
+    resource.save
+    yield resource if block_given?
+    if resource.persisted?
+      if resource.active_for_authentication?
+        set_flash_message :notice, :signed_up if is_flashing_format?
+        sign_up(resource_name, resource)
+        respond_with resource, location: after_sign_up_path_for(resource)
+      else
+        set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}" if is_flashing_format?
+        expire_data_after_sign_in!
+        respond_with resource, location: after_inactive_sign_up_path_for(resource)
+      end
+    else
+      clean_up_passwords resource
+      #respond_with resource
+      set_flash_message :alert, :"invalid"
+      redirect_to new_trainer_registration_path
+    end
+    #redirect_to new_trainer_registration_path
+  end
+
+
+  private
+
+  def sign_up_params
+    params.require(:trainer).permit(:login, :email, :password, :password_confirmation)
+  end
+
+  def account_update_params
+    params.require(:trainer).permit(:login, :email, :password, :password_confirmation, :current_password)
+  end
+
   # GET /resource/sign_up
   # def new
   #   super
@@ -58,40 +94,5 @@ class RegistrationsController < Devise::RegistrationsController
   #   super(resource)
   # end`
 
-  def create
-    # modify logic to redirect to root url
-    build_resource(sign_up_params)
-
-    resource.save
-    yield resource if block_given?
-    if resource.persisted?
-      if resource.active_for_authentication?
-        set_flash_message :notice, :signed_up if is_flashing_format?
-        sign_up(resource_name, resource)
-        respond_with resource, location: after_sign_up_path_for(resource)
-      else
-        set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}" if is_flashing_format?
-        expire_data_after_sign_in!
-        respond_with resource, location: after_inactive_sign_up_path_for(resource)
-      end
-    else
-      clean_up_passwords resource
-      #respond_with resource
-      set_flash_message :alert, :"invalid"
-      redirect_to new_trainer_registration_path
-    end
-    #redirect_to new_trainer_registration_path
-  end
-
-
-  private
-
-  def sign_up_params
-    params.require(:trainer).permit(:login, :email, :password, :password_confirmation)
-  end
-
-  def account_update_params
-    params.require(:trainer).permit(:login, :email, :password, :password_confirmation, :current_password)
-  end
 end
 
