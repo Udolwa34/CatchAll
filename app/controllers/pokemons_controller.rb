@@ -1,7 +1,5 @@
 class PokemonsController < ApplicationController
   before_action :set_pokemon, only: [:show, :edit, :update, :destroy, :changeStateOfPokemon]
-  before_action :authenticate_trainer!
-
 
   def getPokemonByPage
     @page = params[:page]

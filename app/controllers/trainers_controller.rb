@@ -1,5 +1,4 @@
 class TrainersController < ApplicationController
-#before_filter :authenticate_user!
 
   def show
     @trainer = current_trainer

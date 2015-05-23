@@ -1,6 +1,5 @@
 class BadgesController < ApplicationController
   before_action :set_badge, only: [:show, :edit, :update, :destroy, :removeFromTrainer, :addToTrainer]
-  before_action :authenticate_trainer!
 
   #Removing a badge from a trainer's collection
   def removeFromTrainer
