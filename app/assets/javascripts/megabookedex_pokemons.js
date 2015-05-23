@@ -87,6 +87,8 @@ function navigationButtonsUpdate(){
   for (var i = page+1; i < (page + 3) && i <= pageMax; i++){
     $("#navButtons").append("<li class='goToPage' onclick='goToPage("+i+")'><a>"+i+"</a></li>");
   }
+
+  $("#pkmnPageSelect").val(page);
 }
 
 

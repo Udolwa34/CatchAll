@@ -360,3 +360,16 @@ li.activeNavButton a {
 	background-color: #563d7c;
 }
 
+nav select{
+	width: 150px !important;
+	float: right !important;
+	margin-top: 20px;
+	height: 32px !important;
+}
+
+nav select option{
+	padding: 5px;
+}
+
+
+
