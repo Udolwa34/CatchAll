@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   get 'contact_us' => 'contacts#new'
   #get 'contact_us/validation' => 'contacts#create'
 
-  get 'ranking' => 'rankings#index'
+  get 'ranking' => 'ranks#index'
 
   get 'account' => 'trainers#show'
 
