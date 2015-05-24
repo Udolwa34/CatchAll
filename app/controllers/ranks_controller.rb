@@ -23,7 +23,7 @@ class RanksController < ApplicationController
 		@trainers = @trainersAll.limit(50).order("id asc")
 
 		@ranksAll = Rank.all
-		@ranks = @ranksAll.joins(:trainer).select('ranks.*, trainers.login').limit(50).order("total_points desc")
+		@ranks = @ranksAll.joins(:trainer).select('ranks.*, trainers.login').limit(1).order("total_points desc")
 		@trainerRank = current_trainer.rank
 
 	end
@@ -54,6 +54,21 @@ class RanksController < ApplicationController
 			end 
 		end 
 		render json: { :total => Rank.all }, status: :ok
+	end
+
+	def getRankByPage
+	    @page = params[:page]
+	    if @page == ""
+	      #Throw Error
+	      render nothing: true, :status => :forbidden
+	    else 
+	      #Rendering with some data 
+		  @ranks = Rank.all.joins(:trainer).select('ranks.*, trainers.login').limit(1).offset(@page).order("total_points desc");
+
+	      render json: { 
+	        :ranks => @ranks
+	      }, status: :ok
+	    end
 	end
 
 

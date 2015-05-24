@@ -74,9 +74,9 @@
               <% if @trainerRank != nil %>
                 <td id="currentTrainerRank">/ <%= @ranksAll.count %></td>
                 <td id="currentTrainerPseudo"><%= @trainerPseudo %></td>
-                <td><%= @trainerRank.pokemon_caught %> / <%= @pokemonMax %></td>
+                <td><%= @trainerRank.pokemon_caught %> / <span id="pokemonMax"><%= @pokemonMax %></span></td>
                 <td><%= @trainerRank.pokemon_viewed %> / <%= @pokemonMax %></td>
-                <td><%= @trainerRank.badges_count %> / <%= @badgeMax %></td>
+                <td><%= @trainerRank.badges_count %> / <span id="badgeMax"><%= @badgeMax %></span></td>
                 <td><%= @trainerRank.total_points %></td>
               <% else %>
                 <td><%= "None" %></td>
@@ -90,27 +90,26 @@
           </tbody>
         </table>
       </div>
-      
-      <nav style="margin-bottom:-10px">
-        <ul class="pagination">
-          <li>
-            <a href="#" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-            </a>
-          </li>
-          <li><a href="#">1</a></li>
-          <li><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a>...</a></li>
-          <li><a href="#">299</a></li>
-          <li><a href="#">300</a></li>
-          <li>
-            <a href="#" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
+      <% if @ranksAll.count > 0 %>
+        <nav style="margin-bottom:-10px">
+          <ul class="pagination">
+            <li id="goToFirstPageRank"><a aria-label="First">First</a></li>
+            <li id="goToPrevPageRank"><a aria-label="Previous">Previous</a></li>
+          </ul>
+          <ul class="pagination" id="navButtonsRank"></ul>
+          <ul class="pagination">
+            <li id="goToNextPageRank"><a aria-label="Next">Next</a></li>
+            <li id="goToLastPageRank" value="<%= @ranksAll.count/1 %>"><a aria-label="Last">Last</a></li>
+          </ul>
+          <select class="form-control" id="rankPageSelect">
+              <% for i in 1..((@ranksAll.count/1).to_i) %>
+                <option value="<%= i %>" onclick="goToPageRank(<%= i %>)">
+                  Page <%= i %>
+                </option>
+              <% end %>
+          </select>
+        </nav>
+      <% end %>
 
       <div class="panel panel-default">
        <div class="panel-heading">Ranking</div>
@@ -127,7 +126,7 @@
               <th>Points</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="rankList">
             <% if @ranksAll.count > 0 %>
               <% @i = 1 %>
               <% @pointsPrevious = 0 %>

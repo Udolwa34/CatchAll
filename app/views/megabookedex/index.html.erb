@@ -9,24 +9,23 @@
   <div class="panel panel-default">
     <div id="hid_maxPokemon" style="display:none"><%= @pokemonMax %></div>
     <div class="panel-heading">Summary</div>
-    <div class="panel-body">
-      <table class="table">
-        <thead>
-          <th>Pokémon caught</th>
-          <th>Pokémon seen</th>
-          <th>Badges obtained</th>
-          <th>Points</th>
-        </thead>
-        <tbody>
-          <tr>
-            <td><span id="pkmnCaught"><%= @CaughtNb %></span> / <%= @pokemonMax %></td>
-            <td><span id="pkmnSeen"><%= @SeenNb %></span> / <%= @pokemonMax %></td>
-            <td><span id="badgeObtained"><%= @trainerBadges.count %></span> / <%= @badgesTotal %></td>
-            <td id="trainerPoints"><%= (@trainerBadges.count + 1) * @CaughtNb * @SeenNb %></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+
+    <table class="table">
+      <thead>
+        <th>Pokémon caught</th>
+        <th>Pokémon seen</th>
+        <th>Badges obtained</th>
+        <th>Points</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span id="pkmnCaught"><%= @CaughtNb %></span> / <%= @pokemonMax %></td>
+          <td><span id="pkmnSeen"><%= @SeenNb %></span> / <%= @pokemonMax %></td>
+          <td><span id="badgeObtained"><%= @trainerBadges.count %></span> / <%= @badgesTotal %></td>
+          <td id="trainerPoints"><%= (@trainerBadges.count + 1) * @CaughtNb * @SeenNb %></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
   <div class="panel panel-default">
@@ -61,11 +60,6 @@
               <% end %>
           </select>
         </nav>
-
-        <div class="Test">
-          <div id="resultsPKMN"></div>
-          <div id="resultsPKMNTrainer"></div>
-        </div>
 
         <div>
           <div class="row" id="pkmnList">
