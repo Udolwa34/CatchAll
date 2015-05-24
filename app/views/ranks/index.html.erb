@@ -23,23 +23,24 @@
             var time = secondsRemaining + (minutesRemaining * 60) + (hoursRemaining * 3600);
 
             var myCountdownTest = new Countdown({
-                            time : time,
-                            width : 300, 
-                            height  : 80,
-                            onComplete : newDay,
-                            rangeHi : "hour",
-                            hideLine : true
-                            });
+                time : time, width : 300, height  : 80,
+                onComplete : newDay, rangeHi : "hour", hideLine : true
+            });
           </script>
         </div>
       </div>
       
       <% if @ranksAll.count > 2 %>
         <div class="row">
+        <% @pointsPrevious = 0 %>
+        <% @decalage = 0 %>
         <% for n in (0..2) do %>
             <div class="col-sm-12 col-md-4">
               <div class="thumbnail">
-                <%= image_tag("medals/"+@medals[n], :class => "medals") %>
+                <% if n!= 0 && @ranks[n].total_points == @pointsPrevious %>
+                  <% @decalage = @decalage + 1 %>
+                <% end %>
+                <%= image_tag("medals/"+@medals[n - @decalage], :class => "medals") %>
                 <div class="caption">
                   <h3><%= @ranks[n].trainer.login %></h3>
                   <hr>
@@ -51,6 +52,7 @@
                 </div>
               </div>
             </div>
+            <% @pointsPrevious = @ranks[n].total_points %> 
         <% end %>
         </div>
       <% end %>
@@ -58,7 +60,7 @@
        <div class="panel-heading">Your position in this ranking</div>
 
         <!-- Table -->
-        <table class="table">
+        <table id="tableRankCurrentTrainer" class="table">
           <thead>
             <tr>
               <th>#</th>
@@ -72,7 +74,7 @@
           <tbody>
             <tr>
               <% if @trainerRank != nil %>
-                <td>/ <%= @ranksAll.count %></td>
+                <td id="rankCurrentTrainer">/ <%= @ranksAll.count %></td>
                 <td><%= @trainerPseudo %></td>
                 <td><%= @trainerRank.pokemon_caught %> / <span id="pokemonMax"><%= @pokemonMax %></span> </td>
                 <td><%= @trainerRank.pokemon_viewed %> / <%= @pokemonMax %></td>
@@ -115,7 +117,7 @@
        <div class="panel-heading">Ranking</div>
 
         <!-- Table -->
-        <table class="table">
+        <table id="tableRanks" class="table">
           <thead>
             <tr>
               <th>#</th>
@@ -128,15 +130,23 @@
           </thead>
           <tbody id="rankList">
             <% if @ranksAll.count > 0 %>
+              <% @i = 1 %>
+              <% @pointsPrevious = 0 %>
+              <% @decalage = 0 %>
               <% @ranks.each do |rank| %>
-                <tr>
-                  <td>None</td>
-                  <td><%= rank.trainer.login %></td>
+                <% if @i!= 1 && rank.total_points == @pointsPrevious %>
+                  <% @decalage = @decalage + 1 %>
+                <% end %>
+                <tr class="rankLigns">
+                  <td class="colRank"><%= @i - @decalage %> / <%= @ranksAll.count %></td>
+                  <td class="colLogin"><%= rank.trainer.login %></td>
                   <td><%= rank.pokemon_caught %> / <%= @pokemonMax %></td>
                   <td><%= rank.pokemon_viewed %> / <%= @pokemonMax %></td>
                   <td><%= rank.badges_count %> / <%= @badgeMax %></td>
                   <td><%= rank.total_points %></td>
                 </tr>
+                <% @pointsPrevious = rank.total_points %> 
+                <% @i = @i + 1 %>
               <% end %>
             <% else %>
               <tr>

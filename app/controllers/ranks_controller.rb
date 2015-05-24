@@ -19,7 +19,7 @@ class RanksController < ApplicationController
   		# Trainer
 		@trainersAll = Trainer.all
 		@trainerMax = @trainersAll.count
-		@trainerPseudo = current_trainer.email
+		@trainerPseudo = current_trainer.login
 		@trainers = @trainersAll.limit(50).order("id asc")
 
 		@ranksAll = Rank.all
