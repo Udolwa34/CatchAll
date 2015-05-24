@@ -1,35 +1,11 @@
-/*
-$(document).ready(function(){
-  //Set current trainer's rank number on "trainer lign"
-  if ( $("#RankingTitle").length != 0 ){
-    trainerPseudo = $("#currentTrainerPseudo").text();
-
-    $("#tableRanks .rankLigns").each(function(){
-      if ($(this).find(".colLogin").text() == trainerPseudo){
-        $("#currentTrainerRank").text(
-          $(this).find(".colRank").text().split(" /")[0]
-          + " /" + 
-          $(this).find(".colRank").text().split(" /")[1]
-        )
-      }
-    });
-  }
-});
-*/
 $(document).ready(function(){
 
   if ( $("#RankingTitle").length != 0 ){
     page = 1;
     pokemonMax = $("#pokemonMax").text();
     badgeMax = $("#badgeMax").text();
-    pageMax = $("#goToLastPageRank").attr('value');
+    pageMax = $("#goToLastPageRank").attr('value') == 0;
     navigationButtonsRankUpdate();
-    /*maxPokemon = parseInt($("#hid_maxPokemon").text());
-      $("#hid_maxPokemon").remove();  
-    */
-
-    //Definition of Mustache's template
-    //$.Mustache.load('./assets/templates.htm');
 
     ////////////////////////////Navigation buttons///////////////////////////////
     //Going on previous page
@@ -123,7 +99,7 @@ function getRankByPage(numberPage){
       rankList.html("");
 
         for ( var i = 0; i < data["ranks"].length; i++){
-          rankList.append("<tr><td>None</td><td>" + data["ranks"][i]["login"] + "</td><td>" + data["ranks"][i]["pokemon_caught"] + " / " + pokemonMax + "</td><td>" + data["ranks"][i]["pokemon_viewed"] + " / " + pokemonMax + "</td><td>" + data["ranks"][i]["badges_count"] + " / " + badgeMax + "</td><td>" + data["ranks"][i]["total_points"] + "</td></tr>");
+          rankList.append("<tr><td>"+ data["ranks"][i]["position"] +"</td><td>" + data["ranks"][i]["login"] + "</td><td>" + data["ranks"][i]["pokemon_caught"] + " / " + pokemonMax + "</td><td>" + data["ranks"][i]["pokemon_viewed"] + " / " + pokemonMax + "</td><td>" + data["ranks"][i]["badges_count"] + " / " + badgeMax + "</td><td>" + data["ranks"][i]["total_points"] + "</td></tr>");
         }
      },
      error : function (){

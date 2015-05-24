@@ -1,162 +1,148 @@
-    <div class="container">
-		  <div class="introduction page-header">
-        <h1 id="RankingTitle">Ranking</h1>
-        <h3>Who will be the next Pokémon Master ?!</h3>
-        <div style="margin:25px 0;">
-          <script type="application/javascript">
+<div class="container">
+  <div class="introduction page-header">
+    <h1 id="RankingTitle">Ranking</h1>
+    <h3>Who will be the next Pokémon Master ?!</h3>
+    <div style="margin:25px 0;">
+      <script type="application/javascript">
 
-            function newDay(result){
-                window.location.reload()
-            }
+        function newDay(result){
+            window.location.reload()
+        }
 
-            var currentDate = new Date();
-            var hours = currentDate.getHours();
-            var minutes = currentDate.getMinutes();
-            var seconds = currentDate.getSeconds();
+        var currentDate = new Date();
+        var hours = currentDate.getHours();
+        var minutes = currentDate.getMinutes();
+        var seconds = currentDate.getSeconds();
 
-            var secondsRemaining = 60 - seconds;
-            var minutesRemaining = seconds != 0 ? (60 - minutes) - 1 : 60 - minutes;
-            var hoursRemaining = minutes != 0 ? (24 - hours) - 1 : 24 - hours;
+        var secondsRemaining = 60 - seconds;
+        var minutesRemaining = seconds != 0 ? (60 - minutes) - 1 : 60 - minutes;
+        var hoursRemaining = minutes != 0 ? (24 - hours) - 1 : 24 - hours;
 
-            var time = secondsRemaining + (minutesRemaining * 60) + (hoursRemaining * 3600);
+        var time = secondsRemaining + (minutesRemaining * 60) + (hoursRemaining * 3600);
 
-            var myCountdownTest = new Countdown({
-                time : time, width : 300, height  : 80,
-                onComplete : newDay, rangeHi : "hour", hideLine : true
-            });
-          </script>
-        </div>
-      </div>
-      
-      <% if @ranksAll.count > 2 %>
-        <div class="row">
-        <% @pointsPrevious = 0 %>
-        <% @decalage = 0 %>
-        <% for n in (0..2) do %>
-            <div class="col-sm-12 col-md-4">
-              <div class="thumbnail">
-                <% if n!= 0 && @ranks[n].total_points == @pointsPrevious %>
-                  <% @decalage = @decalage + 1 %>
-                <% end %>
-                <%= image_tag("medals/"+@medals[n - @decalage], :class => "medals") %>
-                <div class="caption">
-                  <h3><%= @ranks[n].trainer.login %></h3>
-                  <hr>
-                  <p>
-                    Pokémon caught: <b><%= @ranks[n].pokemon_caught %></b> <br>
-                    Pokémon seen: <b><%= @ranks[n].pokemon_viewed %></b><br>
-                    Points: <b><%= @ranks[n].total_points %></b>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <% @pointsPrevious = @ranks[n].total_points %> 
-        <% end %>
-        </div>
-      <% end %>
-      <div class="panel panel-default">
-       <div class="panel-heading">Your position in this ranking</div>
-
-        <!-- Table -->
-        <table id="tableRankCurrentTrainer" class="table">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Pseudo</th>
-              <th>Pokémon caught</th>
-              <th>Pokémon seen</th>
-              <th>Badges obtained</th>
-              <th>Points</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <% if @trainerRank != nil %>
-                <td id="currentTrainerRank">/ <%= @ranksAll.count %></td>
-                <td id="currentTrainerPseudo"><%= @trainerPseudo %></td>
-                <td><%= @trainerRank.pokemon_caught %> / <span id="pokemonMax"><%= @pokemonMax %></span></td>
-                <td><%= @trainerRank.pokemon_viewed %> / <%= @pokemonMax %></td>
-                <td><%= @trainerRank.badges_count %> / <span id="badgeMax"><%= @badgeMax %></span></td>
-                <td><%= @trainerRank.total_points %></td>
-              <% else %>
-                <td><%= "None" %></td>
-                <td id="currentTrainerPseudo"><%= @trainerPseudo %></td>
-                <td><%= "0" %> / <%= @pokemonMax %></td>
-                <td><%= "0" %> / <%= @pokemonMax %></td>
-                <td><%= "0" %> / <%= @badgeMax %></td>
-                <td><%= "0" %></td>
-              <% end %>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <% if @ranksAll.count > 0 %>
-        <nav style="margin-bottom:-10px">
-          <ul class="pagination">
-            <li id="goToFirstPageRank"><a aria-label="First">First</a></li>
-            <li id="goToPrevPageRank"><a aria-label="Previous">Previous</a></li>
-          </ul>
-          <ul class="pagination" id="navButtonsRank"></ul>
-          <ul class="pagination">
-            <li id="goToNextPageRank"><a aria-label="Next">Next</a></li>
-            <li id="goToLastPageRank" value="<%= @ranksAll.count/1 %>"><a aria-label="Last">Last</a></li>
-          </ul>
-          <select class="form-control" id="rankPageSelect">
-              <% for i in 1..((@ranksAll.count/1).to_i) %>
-                <option value="<%= i %>" onclick="goToPageRank(<%= i %>)">
-                  Page <%= i %>
-                </option>
-              <% end %>
-          </select>
-        </nav>
-      <% end %>
-
-      <div class="panel panel-default">
-       <div class="panel-heading">Ranking</div>
-
-        <!-- Table -->
-        <table id="tableRanks" class="table">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Pseudo</th>
-              <th>Pokémon caught</th>
-              <th>Pokémon seen</th>
-              <th>Badges obtained</th>
-              <th>Points</th>
-            </tr>
-          </thead>
-          <tbody id="rankList">
-            <% if @ranksAll.count > 0 %>
-              <% @i = 1 %>
-              <% @pointsPrevious = 0 %>
-              <% @decalage = 0 %>
-              <% @ranks.each do |rank| %>
-                <% if @i!= 1 && rank.total_points == @pointsPrevious %>
-                  <% @decalage = @decalage + 1 %>
-                <% end %>
-                <tr class="rankLigns">
-                  <td class="colRank"><%= @i - @decalage %> / <%= @ranksAll.count %></td>
-                  <td class="colLogin"><%= rank.trainer.login %></td>
-                  <td><%= rank.pokemon_caught %> / <%= @pokemonMax %></td>
-                  <td><%= rank.pokemon_viewed %> / <%= @pokemonMax %></td>
-                  <td><%= rank.badges_count %> / <%= @badgeMax %></td>
-                  <td><%= rank.total_points %></td>
-                </tr>
-                <% @pointsPrevious = rank.total_points %> 
-                <% @i = @i + 1 %>
-              <% end %>
-            <% else %>
-              <tr>
-                <td><%= "None" %></td>
-                <td><%= @trainerPseudo %></td>
-                <td><%= "0" %> / <%= @pokemonMax %></td>
-                <td><%= "0" %> / <%= @pokemonMax %></td>
-                <td><%= "0" %> / <%= @badgeMax %></td>
-                <td><%= "0" %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
+        var myCountdownTest = new Countdown({
+            time : time, width : 300, height  : 80,
+            onComplete : newDay, rangeHi : "hour", hideLine : true
+        });
+      </script>
     </div>
+  </div>
+  
+  <% if @ranksAll.count > 2 %>
+    <div class="row">
+    <% for n in (0..2) do %>
+        <div class="col-sm-12 col-md-4">
+          <div class="thumbnail">
+            <%= image_tag("medals/"+@medals[@ranks[n].position - 1], :class => "medals") %>
+            <div class="caption">
+              <h3><%= @ranks[n].trainer.login %></h3>
+              <hr>
+              <p>
+                Pokémon caught: <b><%= @ranks[n].pokemon_caught %></b> <br>
+                Pokémon seen: <b><%= @ranks[n].pokemon_viewed %></b><br>
+                Points: <b><%= @ranks[n].total_points %></b>
+              </p>
+            </div>
+          </div>
+        </div>
+    <% end %>
+    </div>
+  <% end %>
+  <div class="panel panel-default">
+   <div class="panel-heading">Your position in this ranking</div>
+
+    <!-- Table -->
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Pseudo</th>
+          <th>Pokémon caught</th>
+          <th>Pokémon seen</th>
+          <th>Badges obtained</th>
+          <th>Points</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <% if @trainerRank != nil %>
+            <td><%= @trainerRank.position %></td>
+            <td><%= @trainerPseudo %></td>
+            <td><%= @trainerRank.pokemon_caught %> / <span id="pokemonMax"><%= @pokemonMax %></span></td>
+            <td><%= @trainerRank.pokemon_viewed %> / <%= @pokemonMax %></td>
+            <td><%= @trainerRank.badges_count %> / <span id="badgeMax"><%= @badgeMax %></span></td>
+            <td><%= @trainerRank.total_points %></td>
+          <% else %>
+            <td><%= "None" %></td>
+            <td><%= @trainerPseudo %></td>
+            <td><%= "0" %> / <%= @pokemonMax %></td>
+            <td><%= "0" %> / <%= @pokemonMax %></td>
+            <td><%= "0" %> / <%= @badgeMax %></td>
+            <td><%= "0" %></td>
+          <% end %>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <% if @ranksAll.count > 30 %>
+    <nav style="margin-bottom:-10px">
+      <ul class="pagination">
+        <li id="goToFirstPageRank"><a aria-label="First">First</a></li>
+        <li id="goToPrevPageRank"><a aria-label="Previous">Previous</a></li>
+      </ul>
+      <ul class="pagination" id="navButtonsRank"></ul>
+      <ul class="pagination">
+        <li id="goToNextPageRank"><a aria-label="Next">Next</a></li>
+        <li id="goToLastPageRank" value="<%= @ranksAll.count/30 %>"><a aria-label="Last">Last</a></li>
+      </ul>
+      <select class="form-control" id="rankPageSelect">
+        <% for i in 1..((@ranksAll.count/30).to_i) %>
+          <option value="<%= i %>" onclick="goToPageRank(<%= i %>)">
+            Page <%= i %>
+          </option>
+        <% end %>
+      </select>
+    </nav>
+  <% end %>
+
+  <div class="panel panel-default">
+   <div class="panel-heading">Ranking - <%= @ranksAll.count %> ranked trainer(s)</div>
+
+    <!-- Table -->
+    <table id="tableRanks" class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Pseudo</th>
+          <th>Pokémon caught</th>
+          <th>Pokémon seen</th>
+          <th>Badges obtained</th>
+          <th>Points</th>
+        </tr>
+      </thead>
+      <tbody id="rankList">
+        <% if @ranksAll.count > 0 %>
+          <% @ranks.each do |rank| %>
+            <tr>
+              <td><%= rank.position %></td>
+              <td><%= rank.trainer.login %></td>
+              <td><%= rank.pokemon_caught %> / <%= @pokemonMax %></td>
+              <td><%= rank.pokemon_viewed %> / <%= @pokemonMax %></td>
+              <td><%= rank.badges_count %> / <%= @badgeMax %></td>
+              <td><%= rank.total_points %></td>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr>
+            <td><%= "None" %></td>
+            <td><%= @trainerPseudo %></td>
+            <td><%= "0" %> / <%= @pokemonMax %></td>
+            <td><%= "0" %> / <%= @pokemonMax %></td>
+            <td><%= "0" %> / <%= @badgeMax %></td>
+            <td><%= "0" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

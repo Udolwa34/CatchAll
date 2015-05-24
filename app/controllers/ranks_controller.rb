@@ -1,12 +1,6 @@
 class RanksController < ApplicationController
 
 	def index
-		#@ranksAll = Rank.all
-		#@test = @ranksAll.joins(:trainer).select('ranks.*, trainers.email').limit(50).order("total_points desc")
-		#render :json => { :ranks => @test}
-		#return
-
-
 		# Pokemon
         @pokemonMax = Pokemon.all.count
 
@@ -18,14 +12,11 @@ class RanksController < ApplicationController
 
   		# Trainer
 		@trainersAll = Trainer.all
-		@trainerMax = @trainersAll.count
 		@trainerPseudo = current_trainer.login
-		@trainers = @trainersAll.limit(50).order("id asc")
 
 		@ranksAll = Rank.all
-		@ranks = @ranksAll.joins(:trainer).select('ranks.*, trainers.login').limit(1).order("total_points desc")
+		@ranks = @ranksAll.joins(:trainer).select('ranks.*, trainers.login').limit(30).order("total_points desc")
 		@trainerRank = current_trainer.rank
-
 	end
 
 	#Dev route
@@ -52,7 +43,24 @@ class RanksController < ApplicationController
 			else 
 				trainer.create_rank(@paramsCreateUpdate)
 			end 
-		end 
+		end
+
+		#Determine position for each rank
+		@i = 1
+		@pointsPrevious = 0
+		@decalage = 0
+		@ranksOrderedByPoints = Rank.all.order("total_points desc")
+
+		@ranksOrderedByPoints.each do |rank|
+			if @i!= 1 && rank.total_points == @pointsPrevious
+				@decalage = @decalage + 1
+			end
+			@paramsPosition = { :position => (@i - @decalage)}
+			rank.update(@paramsPosition)
+			@pointsPrevious = rank.total_points 
+	        @i = @i + 1
+		end
+
 		render json: { :total => Rank.all }, status: :ok
 	end
 
@@ -63,8 +71,8 @@ class RanksController < ApplicationController
 	      render nothing: true, :status => :forbidden
 	    else 
 	      #Rendering with some data 
-		  @ranks = Rank.all.joins(:trainer).select('ranks.*, trainers.login').limit(1).offset(@page).order("total_points desc");
-
+		  @ranks = Rank.all.joins(:trainer).select('ranks.*, trainers.login').limit(30).offset(30 * (@page.to_i-1)).order("total_points desc");
+		  
 	      render json: { 
 	        :ranks => @ranks
 	      }, status: :ok

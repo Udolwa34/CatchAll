@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150521183251) do
+ActiveRecord::Schema.define(version: 20150524192246) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 20150521183251) do
     t.integer "pokemon_caught"
     t.integer "badges_count"
     t.integer "total_points"
+    t.integer "position"
   end
 
   add_index "ranks", ["trainer_id"], name: "index_ranks_on_trainer_id", using: :btree
