@@ -13,6 +13,9 @@ class RanksController < ApplicationController
         # Badge
         @badgeMax = Badge.all.count
 
+        # Medals
+        @medals = ["gold", "silver", "bronze"]
+
   		# Trainer
 		@trainersAll = Trainer.all
 		@trainerMax = @trainersAll.count
@@ -20,7 +23,7 @@ class RanksController < ApplicationController
 		@trainers = @trainersAll.limit(50).order("id asc")
 
 		@ranksAll = Rank.all
-		@ranks = @ranksAll.joins(:trainer).select('ranks.*, trainers.email').limit(50).order("total_points desc")
+		@ranks = @ranksAll.joins(:trainer).select('ranks.*, trainers.login').limit(50).order("total_points desc")
 		@trainerRank = current_trainer.rank
 
 	end

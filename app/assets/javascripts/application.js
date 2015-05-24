@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require mustache
 //= require jquery.mustache
 //= require_tree .

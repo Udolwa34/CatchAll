@@ -16,7 +16,6 @@
           <th>Pokemons seen</th>
           <th>Badges obtained</th>
           <th>Points</th>
-          <th>Rank</th>
         </thead>
         <tbody>
           <tr>
@@ -24,7 +23,6 @@
             <td><span id="pkmnSeen"><%= @SeenNb %></span> / <%= @pokemonMax %></td>
             <td><span id="badgeObtained"><%= @trainerBadges.count %></span> / <%= @badgesTotal %></td>
             <td id="trainerPoints"><%= (@trainerBadges.count + 1) * @CaughtNb * @SeenNb %></td>
-            <td><span>4137</span></td>
           </tr>
         </tbody>
       </table>
