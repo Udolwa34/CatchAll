@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get 'pokemons/changeStateOfPokemon/:id' => 'pokemons#changeStateOfPokemon'
   get 'search' => 'pokemons#search'
   get 'api/search' => 'pokemons#apisearch'
+  get 'searchHuntstatePokemon/:id' => 'pokemons#searchHuntstatePokemon'
 
   get 'badges/removeFromTrainer/:id' => 'badges#removeFromTrainer'
   get 'badges/addToTrainer/:id' => 'badges#addToTrainer'

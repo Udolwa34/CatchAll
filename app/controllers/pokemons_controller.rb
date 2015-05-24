@@ -1,5 +1,6 @@
 class PokemonsController < ApplicationController
-  before_action :set_pokemon, only: [:show, :edit, :update, :destroy, :changeStateOfPokemon]
+  before_action :set_pokemon, 
+    only: [:show, :edit, :update, :destroy, :changeStateOfPokemon, :searchHuntstatePokemon]
 
   def getPokemonByPage
     @page = params[:page]
@@ -55,6 +56,7 @@ class PokemonsController < ApplicationController
         if !@hunt.first.update(@paramForUpdate)
           #Throw Error
           render nothing: true, :status => :forbidden
+          return
         end
       end
     end 
@@ -82,6 +84,19 @@ class PokemonsController < ApplicationController
   # GET /search
   def search
     @maxPokemon = Pokemon.all.count
+  end
+
+  # GET /searchHunt
+  def searchHuntstatePokemon
+    @caught = 0
+    @seen = 0
+
+    if @pokemon.trainers.exists?(current_trainer) 
+      @hunt = @pokemon.huntstates.where(:trainer => current_trainer)
+      @caught = @hunt.first.caught
+      @seen = @hunt.first.viewed
+    end
+    render json: { :caught => @caught, :seen => @seen }, status: :ok
   end
 
 
