@@ -1,9 +1,7 @@
     <div class="container">
-      
-
 		  <div class="introduction page-header">
-        <h1>Ranking</h1>
-        <h3>Who will be the next best trainer ?!</h3>
+        <h1 id="RankingTitle">Ranking</h1>
+        <h3>Who will be the next Pokémon Master ?!</h3>
         <div style="margin:25px 0;">
           <script type="application/javascript">
 
@@ -45,9 +43,9 @@
                   <h3><%= @ranks[n].trainer.login %></h3>
                   <hr>
                   <p>
-                    Pokemon caught: <b><%= @ranks[n].pokemon_caught %></b> <br>
-                    Pokemon seen: <b><%= @ranks[n].pokemon_viewed %></b><br>
-                    Point: <b><%= @ranks[n].total_points %></b>
+                    Pokémon caught: <b><%= @ranks[n].pokemon_caught %></b> <br>
+                    Pokémon seen: <b><%= @ranks[n].pokemon_viewed %></b><br>
+                    Points: <b><%= @ranks[n].total_points %></b>
                   </p>
                 </div>
               </div>
@@ -65,8 +63,8 @@
             <tr>
               <th>#</th>
               <th>Pseudo</th>
-              <th>Pokemon caught</th>
-              <th>Pokemon seen</th>
+              <th>Pokémon caught</th>
+              <th>Pokémon seen</th>
               <th>Badges obtained</th>
               <th>Points</th>
             </tr>
@@ -74,15 +72,15 @@
           <tbody>
             <tr>
               <% if @trainerRank != nil %>
-                <td id="rankCurrentTrainer">/ <%= @ranksAll.count %></td>
-                <td><%= @trainerPseudo %></td>
+                <td id="currentTrainerRank">/ <%= @ranksAll.count %></td>
+                <td id="currentTrainerPseudo"><%= @trainerPseudo %></td>
                 <td><%= @trainerRank.pokemon_caught %> / <%= @pokemonMax %></td>
                 <td><%= @trainerRank.pokemon_viewed %> / <%= @pokemonMax %></td>
                 <td><%= @trainerRank.badges_count %> / <%= @badgeMax %></td>
                 <td><%= @trainerRank.total_points %></td>
               <% else %>
                 <td><%= "None" %></td>
-                <td><%= @trainerPseudo %></td>
+                <td id="currentTrainerPseudo"><%= @trainerPseudo %></td>
                 <td><%= "0" %> / <%= @pokemonMax %></td>
                 <td><%= "0" %> / <%= @pokemonMax %></td>
                 <td><%= "0" %> / <%= @badgeMax %></td>
@@ -123,8 +121,8 @@
             <tr>
               <th>#</th>
               <th>Pseudo</th>
-              <th>Pokemon caught</th>
-              <th>Pokemon seen</th>
+              <th>Pokémon caught</th>
+              <th>Pokémon seen</th>
               <th>Badges obtained</th>
               <th>Points</th>
             </tr>
