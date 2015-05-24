@@ -34,51 +34,52 @@
         </div>
       </div>
       
-      <div class="row">
-        <div class="col-sm-12 col-md-4">
-          <div class="thumbnail">
-            <%= image_tag("medals/gold.png", :class => "medals") %>
-            <div class="caption">
-              <h3>FiletMignon<br>DePorcALOrange</h3>
-              <hr>
-              <p>
-                Pokemon caught: <b><%= @ranks[0].pokemon_caught %></b> <br>
-                Pokemon seen: <b><%= @ranks[0].pokemon_viewed %></b><br>
-                Point: <b><%= @ranks[0].total_points %></b>
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-12 col-md-4">
-          <div class="thumbnail">
-            <%= image_tag("medals/silver.png", :class => "medals") %>
-            <div class="caption">
-              <h3>GogoGadgeto<br>FriandALaSaucisse</h3>
-              <hr>
-              <p>
-                Pokemon caught: <b><%= @ranks[1].pokemon_caught %></b> <br>
-                Pokemon seen: <b><%= @ranks[1].pokemon_viewed %></b><br>
-                Point: <b><%= @ranks[1].total_points %></b>
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-12 col-md-4">
+      <% if @ranksAll.count > 2 %>
+        <div class="row">
+          <div class="col-sm-12 col-md-4">
             <div class="thumbnail">
-            <%= image_tag("medals/bronze.png", :class => "medals") %>
-            <div class="caption">
-              <h3>YartikPsartamJEn<br>PeuxPlusDeCeToubib</h3>
-              <hr>
-              <p>
-                Pokemon caught: <b><%= @ranks[2].pokemon_caught %></b> <br>
-                Pokemon seen: <b><%= @ranks[2].pokemon_viewed %></b><br>
-                Point: <b><%= @ranks[2].total_points %></b>
-              </p>
+              <%= image_tag("medals/gold.png", :class => "medals") %>
+              <div class="caption">
+                <h3>FiletMignon<br>DePorcALOrange</h3>
+                <hr>
+                <p>
+                  Pokemon caught: <b><%= @ranks[0].pokemon_caught %></b> <br>
+                  Pokemon seen: <b><%= @ranks[0].pokemon_viewed %></b><br>
+                  Point: <b><%= @ranks[0].total_points %></b>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4">
+            <div class="thumbnail">
+              <%= image_tag("medals/silver.png", :class => "medals") %>
+              <div class="caption">
+                <h3>GogoGadgeto<br>FriandALaSaucisse</h3>
+                <hr>
+                <p>
+                  Pokemon caught: <b><%= @ranks[1].pokemon_caught %></b> <br>
+                  Pokemon seen: <b><%= @ranks[1].pokemon_viewed %></b><br>
+                  Point: <b><%= @ranks[1].total_points %></b>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4">
+              <div class="thumbnail">
+              <%= image_tag("medals/bronze.png", :class => "medals") %>
+              <div class="caption">
+                <h3>YartikPsartamJEn<br>PeuxPlusDeCeToubib</h3>
+                <hr>
+                <p>
+                  Pokemon caught: <b><%= @ranks[2].pokemon_caught %></b> <br>
+                  Pokemon seen: <b><%= @ranks[2].pokemon_viewed %></b><br>
+                  Point: <b><%= @ranks[2].total_points %></b>
+                </p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-
+      <% end %>
       <div class="panel panel-default">
        <div class="panel-heading">Your position in this ranking</div>
 
@@ -96,12 +97,21 @@
           </thead>
           <tbody>
             <tr>
-              <td>/ <%= @ranksAll.count %></td>
-              <td><%= @trainerPseudo %></td>
-              <td><%= @trainerRank.pokemon_caught %> / <%= @pokemonMax %></td>
-              <td><%= @trainerRank.pokemon_viewed %> / <%= @pokemonMax %></td>
-              <td><%= @trainerRank.badges_count %> / <%= @badgeMax %></td>
-              <td><%= @trainerRank.total_points %></td>
+              <% if @ranksAll.count > 0 %>
+                <td>/ <%= @ranksAll.count %></td>
+                <td><%= @trainerPseudo %></td>
+                <td><%= @trainerRank.pokemon_caught %> / <%= @pokemonMax %></td>
+                <td><%= @trainerRank.pokemon_viewed %> / <%= @pokemonMax %></td>
+                <td><%= @trainerRank.badges_count %> / <%= @badgeMax %></td>
+                <td><%= @trainerRank.total_points %></td>
+              <% else %>
+                <td><%= "1 / 1" %></td>
+                <td><%= @trainerPseudo %></td>
+                <td><%= "0" %> / <%= @pokemonMax %></td>
+                <td><%= "0" %> / <%= @pokemonMax %></td>
+                <td><%= "0" %> / <%= @badgeMax %></td>
+                <td><%= "0" %></td>
+              <% end %>
             </tr>
           </tbody>
         </table>
@@ -144,14 +154,25 @@
             </tr>
           </thead>
           <tbody>
-            <% @ranks.each do |rank| %>
+            <% if @ranksAll.count > 0 %>
+              <% @ranks.each do |rank| %>
+                <tr>
+                  <td><%= @i %> / <%= @ranksAll.count %></td>
+                  <td><%= rank.trainer.email %></td>
+                  <td><%= rank.pokemon_caught %> / <%= @pokemonMax %></td>
+                  <td><%= rank.pokemon_viewed %> / <%= @pokemonMax %></td>
+                  <td><%= rank.badges_count %> / <%= @badgeMax %></td>
+                  <td><%= rank.total_points %></td>
+                </tr>
+              <% end %>
+            <% else %>
               <tr>
-                <td><%= @i %> / <%= @ranksAll.count %></td>
-                <td><%= rank.trainer.email %></td>
-                <td><%= rank.pokemon_caught %> / <%= @pokemonMax %></td>
-                <td><%= rank.pokemon_viewed %> / <%= @pokemonMax %></td>
-                <td><%= rank.badges_count %> / <%= @badgeMax %></td>
-                <td><%= rank.total_points %></td>
+                <td><%= "1 / 1" %></td>
+                <td><%= @trainerPseudo %></td>
+                <td><%= "0" %> / <%= @pokemonMax %></td>
+                <td><%= "0" %> / <%= @pokemonMax %></td>
+                <td><%= "0" %> / <%= @badgeMax %></td>
+                <td><%= "0" %></td>
               </tr>
             <% end %>
           </tbody>
