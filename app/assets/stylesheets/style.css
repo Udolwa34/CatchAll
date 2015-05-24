@@ -185,8 +185,11 @@ footer > .container > p > a{
 	opacity: .5;
 }
 
-
-
+.welcome{
+	margin-top: 15px !important;
+	color: #573f7b;
+	font-size: 16px;
+}
 
 
 /*---------------------Login----------------------*/
