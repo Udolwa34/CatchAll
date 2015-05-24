@@ -51,7 +51,7 @@ Rails.application.configure do
     authentication: :plain,
     enable_starttls_auto: true,
     user_name: "catchall.rails@gmail.com",
-    password: "CatchAll33!$"
+    password: ENV["GMAIL_PASSWORD"]
   }
 
 end

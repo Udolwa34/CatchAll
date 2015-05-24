@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20150521183251) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "badges", force: :cascade do |t|
     t.integer  "number"
     t.string   "name"
@@ -32,8 +35,8 @@ ActiveRecord::Schema.define(version: 20150521183251) do
     t.integer "caught"
   end
 
-  add_index "huntstates", ["pokemon_id"], name: "index_huntstates_on_pokemon_id"
-  add_index "huntstates", ["trainer_id"], name: "index_huntstates_on_trainer_id"
+  add_index "huntstates", ["pokemon_id"], name: "index_huntstates_on_pokemon_id", using: :btree
+  add_index "huntstates", ["trainer_id"], name: "index_huntstates_on_trainer_id", using: :btree
 
   create_table "pokemons", force: :cascade do |t|
     t.integer  "number"
@@ -52,7 +55,7 @@ ActiveRecord::Schema.define(version: 20150521183251) do
     t.integer "total_points"
   end
 
-  add_index "ranks", ["trainer_id"], name: "index_ranks_on_trainer_id"
+  add_index "ranks", ["trainer_id"], name: "index_ranks_on_trainer_id", using: :btree
 
   create_table "trainers", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -74,17 +77,17 @@ ActiveRecord::Schema.define(version: 20150521183251) do
     t.string   "login",                  default: "", null: false
   end
 
-  add_index "trainers", ["confirmation_token"], name: "index_trainers_on_confirmation_token", unique: true
-  add_index "trainers", ["email"], name: "index_trainers_on_email", unique: true
-  add_index "trainers", ["login"], name: "index_trainers_on_login", unique: true
-  add_index "trainers", ["reset_password_token"], name: "index_trainers_on_reset_password_token", unique: true
+  add_index "trainers", ["confirmation_token"], name: "index_trainers_on_confirmation_token", unique: true, using: :btree
+  add_index "trainers", ["email"], name: "index_trainers_on_email", unique: true, using: :btree
+  add_index "trainers", ["login"], name: "index_trainers_on_login", unique: true, using: :btree
+  add_index "trainers", ["reset_password_token"], name: "index_trainers_on_reset_password_token", unique: true, using: :btree
 
   create_table "trainers_badges", id: false, force: :cascade do |t|
     t.integer "trainer_id"
     t.integer "badge_id"
   end
 
-  add_index "trainers_badges", ["badge_id"], name: "index_trainers_badges_on_badge_id"
-  add_index "trainers_badges", ["trainer_id"], name: "index_trainers_badges_on_trainer_id"
+  add_index "trainers_badges", ["badge_id"], name: "index_trainers_badges_on_badge_id", using: :btree
+  add_index "trainers_badges", ["trainer_id"], name: "index_trainers_badges_on_trainer_id", using: :btree
 
 end

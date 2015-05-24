@@ -1,0 +1,18 @@
+#Install Postgres
+1 - sudo apt-get update
+2 - sudo apt-get install postgresql postgresql-contrib libpq-dev
+
+#Configuration of Postres's user
+3 - sudo -u postgres createuser -s catchall
+4 - sudo -u postgres psql
+5 - postgres=# \password catchall
+==> Write "catchall!" as password
+6 - postgres=# \q (for quit)
+
+#Create, migrate and refresh DB
+7 - bundle install
+8 - rake db:create
+9 - rake db:migrate
+10 - rake db:seed
+
+# IT'S OVER (9000) !
