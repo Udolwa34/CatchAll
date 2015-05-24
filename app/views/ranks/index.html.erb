@@ -3,7 +3,35 @@
 
 		  <div class="introduction page-header">
         <h1>Ranking</h1>
-        <h3>Who is the best trainer ?!</h3> 
+        <h3>Who will be the next best trainer ?!</h3>
+        <div style="margin:25px 0;">
+          <script type="application/javascript">
+
+            function newDay(result){
+                window.location.reload()
+            }
+
+            var currentDate = new Date();
+            var hours = currentDate.getHours();
+            var minutes = currentDate.getMinutes();
+            var seconds = currentDate.getSeconds();
+
+            var secondsRemaining = 60 - seconds;
+            var minutesRemaining = seconds != 0 ? (60 - minutes) - 1 : 60 - minutes;
+            var hoursRemaining = minutes != 0 ? (24 - hours) - 1 : 24 - hours;
+
+            var time = secondsRemaining + (minutesRemaining * 60) + (hoursRemaining * 3600);
+
+            var myCountdownTest = new Countdown({
+                            time : time,
+                            width : 300, 
+                            height  : 80,
+                            onComplete : newDay,
+                            rangeHi : "hour",
+                            hideLine : true
+                            });
+          </script>
+        </div>
       </div>
       
       <div class="row">
