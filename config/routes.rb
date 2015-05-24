@@ -30,6 +30,8 @@ Rails.application.routes.draw do
 
   get 'account' => 'trainers#show'
 
+  get 'ranks/getRankByPage/:page' => 'ranks#getRankByPage'
+
 
 
   #Dev routes
