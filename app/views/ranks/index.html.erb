@@ -119,7 +119,7 @@
             <% @ranks.each do |rank| %>
               <tr>
                 <td><%= @i %> / <%= @ranksAll.count %></td>
-                <td><%= rank.id %></td>
+                <td><%= rank.trainer.email %></td>
                 <td><%= rank.pokemon_caught %> / <%= @pokemonMax %></td>
                 <td><%= rank.pokemon_viewed %> / <%= @pokemonMax %></td>
                 <td><%= rank.badges_count %> / <%= @badgeMax %></td>

@@ -1,13 +1,17 @@
 class RanksController < ApplicationController
 
 	def index
+		#@ranksAll = Rank.all
+		#@test = @ranksAll.joins(:trainer).select('ranks.*, trainers.email').limit(50).order("total_points desc")
+		#render :json => { :ranks => @test}
+		#return
+
+
 		# Pokemon
-		@pokemonsAll = Pokemon.all
-        @pokemonMax = @pokemonsAll.count
+        @pokemonMax = Pokemon.all.count
 
         # Badge
-        @badgesAll = Badge.all
-        @badgeMax = @badgesAll.count
+        @badgeMax = Badge.all.count
 
   		# Trainer
 		@trainersAll = Trainer.all
@@ -16,9 +20,8 @@ class RanksController < ApplicationController
 		@trainers = @trainersAll.limit(50).order("id asc")
 
 		@ranksAll = Rank.all
-		@ranks = @ranksAll.limit(50).order("total_points desc")
+		@ranks = @ranksAll.joins(:trainer).select('ranks.*, trainers.email').limit(50).order("total_points desc")
 		@trainerRank = current_trainer.rank
-
 
 	end
 

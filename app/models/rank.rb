@@ -1,4 +1,6 @@
 class Rank < ActiveRecord::Base
+	belongs_to :trainer
+
 	#Task called by "Whenever" Gem
 	def defineRanks
 		#Recalculate ranking stats for all trainers 
