@@ -19,6 +19,7 @@ a:hover{
 	color: #573f7b;
 	cursor: pointer;
 	text-decoration: none;
+	background: transparent;
 }
 
 h1,h2,h3,h4,h5,h6{
