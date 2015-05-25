@@ -125,10 +125,13 @@ footer > .container > p > a{
 	width: 70%;
 }
 
+.pokemonImgContainer{
+	text-align: center;
+}
+
 #pokemonImage{
-	max-height: 100%;
-	max-width: 100%;
-	margin: 0 auto !important;
+	max-height: 500px;
+	max-width: 500px;
 }
 
 .btn-purple{
@@ -337,6 +340,7 @@ footer > .container > p > a{
 	text-align: center;
 	margin-top: 20px;
 }
+
 
 .thumbnail .pokemonImg{
 	min-width: 150px;

@@ -6,8 +6,9 @@ $(document).ready(function(){
 	$(function () {
 	    $('#search').autocomplete({
 	        source: function (request, response) {
+	           searchName = $("#search").val().substr(0,1).toUpperCase() + $("#search").val().substr(1).toLowerCase();
 	           $.ajax({
-	               url: "/api/search?search="+$("#search").val()+"",
+	               url: "/api/search?search=" + searchName + "",
 	               type: 'GET',
 	               dataType: 'json',
 	               data: request,
