@@ -1,25 +1,33 @@
-<div class="container">
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="container" style="margin-bottom:100px">
+<h3>Edit your informations : <%= current_trainer.login %></h3>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
 
-  <div class="form-group input-group">
+  <div class="form-group input-group" style="margin-top:25px">
     <span class="input-group-addon">
       <span class="glyphicon glyphicon-envelope"></span>
     </span>
-    <%= f.email_field :email, autofocus: true, :class=>"form-control" %>
+    <%= f.email_field :email, autofocus: true, :class=>"form-control", :disabled => true %>
   </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
+  
+  <div class="field">
+    <div class="form-group input-group">
+      <span class="input-group-addon">
+        <span class="glyphicon glyphicon-lock"></span>
+      </span>
+      <%= f.password_field :current_password, autocomplete: "off", :class=>"form-control", :placeholder=> "Curent password (we need your current password to confirm your changes)" %>
+  </div>
 
   <div class="form-group input-group">
     <span class="input-group-addon">
       <span class="glyphicon glyphicon-lock"></span>
     </span>
-    <%= f.password_field :password, autocomplete: "off", :class=>"form-control", :placeholder=>"Password ! (leave blank if you don't want to change it)" %>
+    <%= f.password_field :password, autocomplete: "off", :class=>"form-control", :placeholder=>"New Password (leave blank if you don't want to change it)" %>
   </div>
 
   <div class="form-group input-group">
@@ -29,22 +37,14 @@
     <%= f.password_field :password_confirmation, autocomplete: "off" , :class=>"form-control", :placeholder=>"Password confirmation" %>
   </div>
 
-  <div class="field">
-    <div class="form-group input-group">
-      <span class="input-group-addon">
-        <span class="glyphicon glyphicon-lock"></span>
-      </span>
-      <%= f.password_field :current_password, autocomplete: "off", :class=>"form-control", :placeholder=> "Curent password (we need your current password to confirm your changes)" %>
-  </div>
-
   <div class="actions">
-    <%= f.submit "Update", :class=>"btn btn-purple" %>
+    <%= f.submit "Update", :class=>"btn btn-purple btn-block" %>
   </div>
 <% end %>
-
+<br><hr>
 <h3>Cancel my account</h3>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete,  :class=>"btn btn-purple" %></p>
-
-<%= link_to "Back", :back,  :class=>"btn btn-purple" %>
+<p style="font-size:14px">Are you unhappy with our website ? To cancel your account follow this link: <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %> <br>It is so sad but this is the life. Good bye !</p>
+<br><hr>
+<%= link_to "Back to home", '/',  :class=>"btn btn-purple" %>
 </div>

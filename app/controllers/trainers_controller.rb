@@ -8,5 +8,4 @@ class TrainersController < ApplicationController
         format.xml { render :xml => @user }
     end
   end
-
 end

@@ -28,7 +28,6 @@ Rails.application.routes.draw do
 
   get 'ranking' => 'ranks#index'
 
-  get 'account' => 'trainers#show'
 
   get 'ranks/getRankByPage/:page' => 'ranks#getRankByPage'
 
